@@ -1,58 +1,18 @@
-// Reboot ======================================================================
+// Reboot======================================================================
 
-/* HTML
+/* Body
 -------------------------------------------------- */
-html {
-    @include font-size($font-size-sm);
+/* Body */
+
+body {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+  height: -webkit-fill-available;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
-
-
-/* Messages
--------------------------------------------------- */
-.message-container {
-    margin-top: $main-margin-top;
-}
-
-
-/* Icones
--------------------------------------------------- */
-i.fas {
-    margin-right: 0.5rem;
-}
-
-
-/* Alert
--------------------------------------------------- */
-.alert {
-    ul {
-        list-style: none;
-        padding: 0;
-    }
-}
-
-
-/* Footer
--------------------------------------------------- */
-// .footer-primary {
-    // height: $footer-primary-height-y;
-    // z-index: 100;
-    // border: 1px solid rgba(0, 0, 0, 0.6);
-    // background-color: #0C3C60 !important;
-    // a {
-    //     @include hover-focus() {
-    //         color: $navbar-dark-hover-color !important;
-    //         text-decoration: none;
-    //     }
-    // }
-// }
-
-// .footer-light {
-//     border: 1px solid #345578;
-// }
-
-.footer-app {
-    i {
-        // font-size: 1.5rem;
-        font-size: $font-size-lg;
-    }
+body > * {
+  flex-shrink: 0;
+  min-height: -webkit-fill-available;
 }

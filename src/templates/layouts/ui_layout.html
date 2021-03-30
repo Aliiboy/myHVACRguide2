@@ -6,10 +6,11 @@
 
 {# CSS et SCSS #}
 {# ---------------------------------------------- #}
+{# Application #}
 {% block app_styles %}
-{% compress css %}
-<link type="text/x-scss" href="{% static "scss/core.scss" %}" rel="stylesheet" media="screen">
-{% endcompress %}
+  {% compress css %}
+    <link type="text/x-scss" href="{% static "scss/core.scss" %}" rel="stylesheet" media="screen">
+  {% endcompress %}
 {% endblock app_styles %}
 
 
@@ -23,21 +24,19 @@
 
 {# Ui Wrapper #}
 <div class="container-fluid bg-light">
-  <div class="row">
-
+  <div class="row min-vh-100">
     {# Sidebar #}
-    <aside class="col-auto p-0">
       {% include "components/sidebar/ui_sidebar.html" %}
-    </aside>
 
-    {# Block de la page #}
     <main class="col ml-md-auto p-0">
+      {# Navbar #}
       {% include "components/navbar/ui_navbar.html" %}
       {% include 'components/message/ui_messages.html' %}
+
+      {# Block de la page #}
       <div class="container-fluid border rounded bg-white m-3">
         {% block content %} {% endblock content %}
-        {# Footer #}
-        {% include "components/footer/ui_footer.html" %}
+
       </div> <!-- container-fluid -->
     </main>
   </div>

@@ -2,145 +2,59 @@
 
 /* Primary
 -------------------------------------------------- */
-.sidebar {
-  position: fixed;
-  // top: 0;
-  // bottom: 0;
-  // left: 0;
-  // z-index: 100; /* Behind the navbar */
-  // padding: $navbar-account-height-y 0 0; /* Height of navbar */
-  padding: $navbar-padding-y 0;
-  min-width: $sidebar-width-x;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
-  transition: all 0.3s;
-  // .dropdown-toggle::after {
-  //   display: block;
-  //   position: relative;
-  //   top: 50%;
-  //   right: 20px;
-  //   transform: translateY(-50%);
-  // }
+/* Bouton de navigation */
 
+.btn-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: .25rem .5rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, .65);
+  background-color: transparent;
+  border: 0;
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+  color: rgba(0, 0, 0, .85);
+  background-color: #d2f4ea;
 }
 
-.sidebar-brand {
-  display: inline-block;
-  min-height: $navbar-account-height-y - $navbar-padding-y;
-  min-width: $sidebar-width-x - $navbar-padding-x;
-  padding: 0 1.5rem;
-  padding-top: $navbar-padding-y;
-  padding-bottom: $navbar-padding-y;
-  @include font-size($navbar-brand-font-size);
-  line-height: inherit;
-  white-space: nowrap;
-
-  @include hover-focus() {
-    text-decoration: none;
-  }
+.btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
 }
 
-.sidebar-nav {
-  display: flex;
-  flex-direction: column; // cannot use `inherit` to get the `.navbar`s value
-  padding: 0;
-  margin-bottom: 0;
-  list-style: none;
-
-  .dropdown-items {
-    // position: static;
-    // float: none;
-    padding: 0;
-    overflow-y: hidden;
-    list-style: none;
-    transition: max-height .3s ease-in-out;
-  }
+.btn-toggle[aria-expanded="true"] {
+  color: rgba(0, 0, 0, .85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
 }
 
-.sidebar-toggler-icon {
-  display: inline-block;
-  width: 1.5em;
-  height: 1.5em;
-  vertical-align: middle;
-  content: "";
-  background: no-repeat center center;
-  background-size: 100% 100%;
+.btn-toggle-nav a {
+  display: inline-flex;
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+  text-decoration: none;
+}
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: #d2f4ea;
 }
 
 
-.sidebar-sticky {
-  position: relative;
-  top: 0;
-  height: calc(100vh - #{$navbar-account-height-y}); 
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+/* Souris */
+
+.scrollarea {
+  overflow-y: auto;
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-  }
-}
 
-/* Responsive
--------------------------------------------------- */
-// sm: 576px, md: 768px, lg: 992px, xl: 1200px
-// > sm
-@media (min-width: 576px) {
-  .sidebar {
-    margin-left: 0;
-  }
+/* Font */
 
-  .app-wrapper.toggled .sidebar {
-    margin-left: 0;
-  }
-
-  #sidebarCollapse {
-    display: none;
-  }
-}
-@media (max-width: 576px) {
-  .sidebar {
-    margin-left: -55rem;
-  }
-
-  .app-wrapper.toggled .sidebar {
-    margin-left: 0;
-  }
-
-  #sidebarCollapse {
-    display: inline-block;
-  }
-}
-
-/* Themes
--------------------------------------------------- */
-
-.sidebar-dark {
-  .sidebar-brand {
-    color: $navbar-dark-brand-color;
-    @include hover-focus() {
-      color: $navbar-dark-brand-hover-color;
-    }
-  }
-
-  .sidebar-toggler {
-    color: $navbar-dark-color;
-    border-color: $navbar-dark-toggler-border-color;
-  }
-
-  .sidebar-toggler-icon {
-    background-image: escape-svg($sidebar-dark-toggler-icon-bg);
-  }
-
-  .sidebar-text {
-    color: $navbar-dark-color;
-    a {
-      color: $navbar-dark-active-color;
-
-      @include hover-focus() {
-        color: $navbar-dark-active-color;
-      }
-    }
-  }
-}
+.fw-semibold { font-weight: 600; }
+.lh-tight { line-height: 1.25; }

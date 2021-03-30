@@ -19,12 +19,12 @@ Including another URLconf
 from django.urls import path
 # > Vues
 from customer.views import (
-    ProfileUpdateView,
+    AccountSettingsView,
 )
 
 
 app_name = 'customer'
 urlpatterns = [
     # > Profil
-    path('profile/', ProfileUpdateView.as_view(), name='account_profile'),
+    path('settings/', AccountSettingsView.as_view(), name='account_settings'),
 ]

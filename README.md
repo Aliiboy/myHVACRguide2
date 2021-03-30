@@ -85,3 +85,10 @@ creation
 ### setting
 mise en cache
 ### menu navigation en python
+
+### HTML
+Continuer sur dream w au plus simple
+dream w : faire meme principe de andt sur edition du profil
+    ajout ou changement d'email
+    modification de mot de pass
+    tout les templates accounts

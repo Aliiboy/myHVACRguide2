@@ -263,18 +263,17 @@ class MyAddEmailForm(AddEmailForm):
         )
 
 
-class ProfileUpdateForm(ModelForm):
+class AccountsSettingsForm(ModelForm):
     """
-    Customer.
+    Account Settings.
 
-    Edition du profil
-
+    Edition du profil utilisateur
     """
 
     def __init__(self, user, *args, **kwargs):
         self.customuser = user
         kwargs['instance'] = user
-        super(ProfileUpdateForm, self).__init__(*args, **kwargs)
+        super(AccountsSettingsForm, self).__init__(*args, **kwargs)
         # > Crispy forms
         self.helper = FormHelper()
         # Attributs
