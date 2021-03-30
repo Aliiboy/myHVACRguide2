@@ -18,29 +18,24 @@
 {# ---------------------------------------------- #}
 {% block app_layout %}
 
-{# Header #}
-<header>
-</header>
-
-{# Ui Wrapper #}
-<div class="container-fluid bg-light">
-  <div class="row min-vh-100">
+{# UI Layout #}
+  <div class="row min-vh-100 container-fluid p-0 m-0 bg-light">
     {# Sidebar #}
       {% include "components/sidebar/ui_sidebar.html" %}
 
-    <main class="col ml-md-auto p-0">
+    <div class="col ml-md-auto p-0">
       {# Navbar #}
       {% include "components/navbar/ui_navbar.html" %}
       {% include 'components/message/ui_messages.html' %}
 
-      {# Block de la page #}
-      <div class="container-fluid border rounded bg-white m-3">
+      {# Ui Wrapper #}
+      <main class="row py-3 m-4 border bg-white">
+        {# Block de la page #}
         {% block content %} {% endblock content %}
+      </main> <!-- wrapper container-fluid -->
+    </div> <!-- col -->
+  </div> <!-- row -->
 
-      </div> <!-- container-fluid -->
-    </main>
-  </div>
-</div>
 {% endblock app_layout %}
 
 

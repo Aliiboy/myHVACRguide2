@@ -13,10 +13,13 @@
 {# Block de la page #}
 {# ---------------------------------------------- #}
 {% block content %}
-  <nav class="col col-auto nav flex-column nav-pills p-0 border-end">
-    <a class="nav-link active" aria-current="page" href="#">Active</a>
-    <a class="nav-link" href="#">Link</a> <a class="nav-link" href="#">Link</a> <a class="nav-link disabled" href="#"
-      tabindex="-1" aria-disabled="true">Disabled</a>
-  </nav>
-  <div class="col">Placez ici le contenu de la nouvelle balise div</div>
+    <h3 class="font-weight-normal m-0 mt-2">{% trans "Profil" %}</h3>
+    <hr class="divider bg-light">
+    {# Formulaire ou contenu msg #}
+    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 pl-0">
+      <fieldset class="fieldset border rounded">
+        {# Crispy-forms #}
+        {% crispy form %}
+      </fieldset>
+    </div>
 {% endblock content %}
