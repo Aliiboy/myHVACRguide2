@@ -5,7 +5,7 @@
 
 {# Sidebar #}
 {# ---------------------------------------------- #}
-<aside class="col col-auto p-3 bg-white border-end" style="width: 280px;">
+<aside class="sidebar col col-auto p-3 bg-white border-end" style="width: 280px;">
   {# Titre site et logo #}
   <a class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom" href="/">
     <span class="fs-6 fw-semibold">my HVACR Guide</span>
@@ -14,12 +14,12 @@
   <ul class="list-unstyled ps-0">
     {# Dropdown Compte #}
     <li class="mb-1">
-      <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-        data-bs-target="#account-collapse" aria-expanded="false">{% trans "Compte" %}</button>
-      <div class="collapse" id="account-collapse">
+      <button class="btn btn-toggle align-items-center link-dark {% if 'accounts' in request.path %}active{% endif %} rounded collapsed" data-bs-toggle="collapse"
+        data-bs-target="#account-collapse" aria-expanded="{% if 'accounts' in request.path %}true{% else %}false{% endif %}">{% trans "Compte" %}</button>
+      <div class="{% if 'accounts' in request.path %}collapse show{% else %}collapse{% endif %}" id="account-collapse">
         {# Items Compte #}
         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-          <li><a href="{{ account_settings }}" class="link-dark rounded">{% trans "Parametres" %}</a></li>
+          <li><a href="{{ account_settings }}" class="link-dark {% if 'accounts' in request.path %}active{% else %}{% endif %} rounded">{% trans "Parametres" %}</a></li>
         </ul>
       </div> <!-- collapse -->
     </li> <!-- mb-1 -->

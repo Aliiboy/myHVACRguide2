@@ -2,6 +2,19 @@
 
 /* Primary
 -------------------------------------------------- */
+.sidebar {
+  .list-unstyled {
+    .link-dark {
+      color: rgba(0,0,0,0.65);
+    }
+
+    .link-dark.active {
+      font-weight: 600;
+      color: rgba(0,0,0,0.85);
+    }
+  } 
+}
+
 /* Bouton de navigation */
 
 .btn-toggle {
