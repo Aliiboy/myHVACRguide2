@@ -263,7 +263,7 @@ class MyAddEmailForm(AddEmailForm):
         )
 
 
-class AccountsSettingsForm(ModelForm):
+class ProfileUpdateForm(ModelForm):
     """
     Account Settings.
 
@@ -273,7 +273,7 @@ class AccountsSettingsForm(ModelForm):
     def __init__(self, user, *args, **kwargs):
         self.customuser = user
         kwargs['instance'] = user
-        super(AccountsSettingsForm, self).__init__(*args, **kwargs)
+        super(ProfileUpdateForm, self).__init__(*args, **kwargs)
         # > Crispy forms
         self.helper = FormHelper()
         # Attributs

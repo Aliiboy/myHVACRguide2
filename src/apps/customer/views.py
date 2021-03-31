@@ -13,20 +13,20 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 # > Forms
 from customer.forms import (
-    AccountsSettingsForm,
+    ProfileUpdateForm,
 )
 
 
-class AccountsSettingsView(LoginRequiredMixin, generic.FormView):
+class ProfileUpdateView(LoginRequiredMixin, generic.FormView):
     """
     Account Settings.
 
     Edition du profil utilisateur
     """
 
-    form_class = AccountsSettingsForm
-    template_name = 'pages/customer/account_settings.html'
-    success_url = reverse_lazy('customer:account_settings')
+    form_class = ProfileUpdateForm
+    template_name = 'pages/customer/profile_update.html'
+    success_url = reverse_lazy('customer:profile_update')
 
     def get_form_kwargs(self):
         """
@@ -46,5 +46,5 @@ class AccountsSettingsView(LoginRequiredMixin, generic.FormView):
         Si le formulaire est valide, redirigez vers l'URL fournie.
         """
         form.save()
-        messages.success(self.request, _("Profil mis à jour"))
+        messages.success(self.request, _("Votre profil est à jour"))
         return redirect(self.get_success_url())

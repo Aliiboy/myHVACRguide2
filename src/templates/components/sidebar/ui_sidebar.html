@@ -1,6 +1,6 @@
 {% load i18n %}
 
-{% url 'customer:account_settings' as account_settings %}
+{% url 'customer:profile_update' as profile_update %}
 
 
 {# Sidebar #}
@@ -19,7 +19,7 @@
       <div class="{% if 'accounts' in request.path %}collapse show{% else %}collapse{% endif %}" id="account-collapse">
         {# Items Compte #}
         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-          <li><a href="{{ account_settings }}" class="link-dark {% if 'accounts' in request.path %}active{% else %}{% endif %} rounded">{% trans "Parametres" %}</a></li>
+          <li><a href="{{ profile_update }}" class="link-dark {% if 'accounts' in request.path %}active{% else %}{% endif %} rounded">{% trans "Parametres" %}</a></li>
         </ul>
       </div> <!-- collapse -->
     </li> <!-- mb-1 -->
