@@ -265,7 +265,7 @@ class MyAddEmailForm(AddEmailForm):
 
 class ProfileUpdateForm(ModelForm):
     """
-    Account Settings.
+    Profile Update.
 
     Edition du profil utilisateur
     """
@@ -274,30 +274,7 @@ class ProfileUpdateForm(ModelForm):
         self.customuser = user
         kwargs['instance'] = user
         super(ProfileUpdateForm, self).__init__(*args, **kwargs)
-        # > Crispy forms
-        self.helper = FormHelper()
-        # Attributs
-        # self.helper.form_id = ''
-        self.helper.form_class = 'p-3'
-        self.helper.form_method = 'post'
-        # self.helper.form_action = ''
-        # > Layout
-        self.helper.layout = Layout(
-            Fieldset("",
-                    #  Row(
-                        # > Remplacer Field par Column si utilisation de Row
-                         Field('last_name',
-                               css_class='form-group'),
-                         Field('first_name',
-                               css_class='form-group'),
-                         Submit('submit',
-                                _('Mettre à jour le profil'),
-                                css_class='btn btn-success'),
-                        #  css_class='border rounded p-3',
-                        #  ),
-                     css_class='fieldset',
-                     ),
-        )
+
 
     class Meta:
         model = CustomUser

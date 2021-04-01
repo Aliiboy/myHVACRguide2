@@ -1,22 +1,43 @@
 {% extends "layouts/ui_layout.html" %}
 
-{% load crispy_forms_tags %}
 {% load i18n %}
+{% load crispy_forms_tags %}
+
+{% url 'customer:profile_update' as profile_update %}
 
 
 {# Changement du Head HTML #}
 {# ---------------------------------------------- #}
 {% block head_title %}{% trans "Ton profil" %}{% endblock %}
-{% block description %}{% trans "Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du Froid et du Conditionnement d'air" %}{% endblock %}
+{% block description %}{% trans "Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
+Froid et du Conditionnement d'air" %}{% endblock %}
 
 
 {# Block de la page #}
 {# ---------------------------------------------- #}
 {% block content %}
-  <nav class="col col-2 nav flex-column nav-pills p-0 border-end">
-    <a class="nav-link active" aria-current="page" href="#">Active</a>
-    <a class="nav-link" href="#">Link</a> <a class="nav-link" href="#">Link</a> <a class="nav-link disabled" href="#"
-      tabindex="-1" aria-disabled="true">Disabled</a>
-  </nav>
-  <div class="col">Placez ici le contenu de la nouvelle balise div</div>
+<nav class="col col-2 nav flex-column nav-pills p-0 border-end">
+  <a class="nav-link active" aria-current="page" href="{{ profile_update }}">{% trans "Profil" %}</a>
+  <a class="nav-link" href="#">Link</a>
+</nav>
+<div class="col">
+  {# Formulaire #}
+  {# ---------------------------------------------- #}
+  <form action="{{ profile_update }}" class="row g-3" method="post" novalidate>
+    {% csrf_token %}
+    <legend>{% trans "Edition du profil" %}</legend>
+    {# Nom #}
+    <div class="col-md-4">
+      {{ form.last_name|as_crispy_field }}
+    </div>
+    {# Prenom #}
+    <div class="col-md-4">
+      {{ form.first_name|as_crispy_field }}
+    </div>
+    {# Validation #}
+    <div class="col-12">
+      <button type="submit" class="btn btn-success">{% trans "Mettre à jour le profil" %}</button>
+    </div>
+  </form>
+</div>
 {% endblock content %}

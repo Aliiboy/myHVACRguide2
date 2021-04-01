@@ -8,33 +8,32 @@
 {# ---------------------------------------------- #}
 {# Application #}
 {% block app_styles %}
-  {% compress css %}
-    <link type="text/x-scss" href="{% static "scss/core.scss" %}" rel="stylesheet" media="screen">
-  {% endcompress %}
+{% compress css %}
+<link type="text/x-scss" href="{% static "scss/core.scss" %}" rel="stylesheet" media="screen">
+{% endcompress %}
 {% endblock app_styles %}
 
 
-{# Block de la mise en page #}
+{# UI Layout #}
 {# ---------------------------------------------- #}
 {% block app_layout %}
 
-{# UI Layout #}
-  <div class="row min-vh-100 container-fluid p-0 m-0 bg-light">
-    {# Sidebar #}
-      {% include "components/sidebar/ui_sidebar.html" %}
+<div class="row min-vh-100 container-fluid p-0 m-0 bg-light">
+  {# Sidebar #}
+  {% include "components/sidebar/ui_sidebar.html" %}
 
-    <div class="col ml-md-auto p-0">
-      {# Navbar #}
-      {% include "components/navbar/ui_navbar.html" %}
-      {% include 'components/message/ui_messages.html' %}
+  <div class="col ml-md-auto p-0">
+    {# Navbar #}
+    {% include "components/navbar/ui_navbar.html" %}
+    {% include 'components/message/ui_messages.html' %}
 
-      {# Ui Wrapper #}
-      <main class="row py-3 m-4 border bg-white">
-        {# Block de la page #}
-        {% block content %} {% endblock content %}
-      </main> <!-- wrapper container-fluid -->
-    </div> <!-- col -->
-  </div> <!-- row -->
+    {# Ui Wrapper #}
+    <main class="row py-3 m-4 border bg-white">
+      {# Block de la page #}
+      {% block content %} {% endblock content %}
+    </main> <!-- wrapper container-fluid -->
+  </div> <!-- col -->
+</div> <!-- row -->
 
 {% endblock app_layout %}
 

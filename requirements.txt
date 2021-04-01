@@ -15,7 +15,8 @@ django-recaptcha==2.0.6
 django-compressor==2.4
 django-libsass==0.8
 # Rendu des formulaires
-django-crispy-forms==1.9.0
+django-crispy-forms==1.11.2
+crispy-bootstrap5==0.3.1
 
 
 # > Heroku
