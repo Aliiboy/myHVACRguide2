@@ -19,8 +19,8 @@ class CustomUser(AbstractUser):
     Modifier/ajouter des champs supplémentaires ici
     """
 
-    first_name = models.CharField(_('prénom'), max_length=30, blank=True)
-    last_name = models.CharField(_('nom'), max_length=30, blank=True)
+    first_name = models.CharField(_('Prénom'), max_length=30, blank=True)
+    last_name = models.CharField(_('Nom'), max_length=30, blank=True)
 
     def __str__(self):
         return self.email

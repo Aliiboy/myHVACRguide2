@@ -28,7 +28,7 @@
     {% include 'components/message/ui_messages.html' %}
 
     {# Ui Wrapper #}
-    <main class="row py-3 m-4 border bg-white">
+    <main class="row py-3 m-4 border rounded bg-white">
       {# Block de la page #}
       {% block content %} {% endblock content %}
     </main> <!-- wrapper container-fluid -->
@@ -41,6 +41,5 @@
 {# Block des scripts JS application. #}
 {# ---------------------------------------------- #}
 {% block app_scripts %}
-<script src="{% static "js/core/messages.js" %}"></script>
-<script src="{% static "js/core/sidebar.js" %}"></script>
+<script src="{% static "js/core.js" %}"></script>
 {% endblock app_scripts %}
