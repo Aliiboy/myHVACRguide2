@@ -7,7 +7,7 @@
 
 {# Account settings menu #}
 {# ---------------------------------------------- #}
-<nav class="col col-2 nav flex-column nav-pills p-0 border-end">
+<nav class="nav flex-column nav-pills">
   <a class="nav-link {% if 'accounts/profile/update' in request.path %}active{% endif %}" href="{{ profile_update }}">{% trans "Profil" %}</a>
   <a class="nav-link {% if 'accounts/password/change' in request.path %}active{% endif %}" href="{{ account_change_password }}">{% trans "Mot de passe" %}</a>
 </nav>

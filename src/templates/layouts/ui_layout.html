@@ -8,33 +8,35 @@
 {# ---------------------------------------------- #}
 {# Application #}
 {% block app_styles %}
-{% compress css %}
-<link type="text/x-scss" href="{% static "scss/core.scss" %}" rel="stylesheet" media="screen">
-{% endcompress %}
+  {% compress css %}
+  <link type="text/x-scss" href="{% static "scss/core.scss" %}" rel="stylesheet" media="screen">
+  {% endcompress %}
 {% endblock app_styles %}
 
 
 {# UI Layout #}
 {# ---------------------------------------------- #}
 {% block app_layout %}
-
 <div class="row min-vh-100 container-fluid p-0 m-0 bg-light">
   {# Sidebar #}
-  {% include "components/sidebar/ui_sidebar.html" %}
+  {# ---------------------------------------------- #}
 
+  <aside class="col col-auto p-0">
+    {% include "components/sidebar/ui_sidebar.html" %}
+  </aside>
+
+  {# Components #}
+  {# ---------------------------------------------- #}
   <div class="col ml-md-auto p-0">
     {# Navbar #}
     {% include "components/navbar/ui_navbar.html" %}
     {% include 'components/message/ui_messages.html' %}
 
-    {# Ui Wrapper #}
-    <main class="row min-vh-100 py-3 m-4 border rounded bg-white">
+    {# Ui wrapper #}
       {# Block de la page #}
-      {% block content %} {% endblock content %}
-    </main> <!-- wrapper container-fluid -->
+      {% block ui_wrapper %} {% endblock ui_wrapper %}
   </div> <!-- col -->
 </div> <!-- row -->
-
 {% endblock app_layout %}
 
 

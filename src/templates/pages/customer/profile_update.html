@@ -1,4 +1,4 @@
-{% extends "layouts/ui_layout.html" %}
+{% extends "layouts/customer_layout.html" %}
 
 {% load i18n %}
 {% load crispy_forms_tags %}
@@ -11,29 +11,30 @@
 Froid et du Conditionnement d'air" %}{% endblock %}
 
 
+{# Changement du Head #}
+{# ---------------------------------------------- #}
+{% block headertext %} {% trans "Edition du profil" %} {% endblock %}
+
+
 {# Block de la page #}
 {# ---------------------------------------------- #}
 {% block content %}
-{% include 'components/nav_and_tabs/customer_profile_update_menu.html' %}
-
-<div class="col px-5 py-0">
   {# Formulaire - Edition du profil #}
   {# ---------------------------------------------- #}
   <form action="{{ profile_update }}" class="row g-3" method="post" novalidate>
     {% csrf_token %}
-    <legend>{% trans "Edition du profil" %}</legend>
+    <!-- <legend>{% trans "Edition du profil" %}</legend> -->
     {# Nom #}
-    <div class="col-md-4">
+    <div class="col">
       {{ form.last_name|as_crispy_field }}
-    </div>
+    </div> <!-- form field -->
     {# Prenom #}
-    <div class="col-md-4">
+    <div class="col">
       {{ form.first_name|as_crispy_field }}
-    </div>
+    </div> <!-- form field -->
     {# Validation #}
     <div class="col-12">
       <button type="submit" class="btn btn-success">{% trans "Mettre à jour le profil" %}</button>
-    </div>
+    </div> <!-- form field -->
   </form>
-</div>
 {% endblock content %}
