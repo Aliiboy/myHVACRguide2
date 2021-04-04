@@ -24,8 +24,6 @@ urlpatterns = [
     # > Apps
     # core
     path("", include('core.urls')),
-    # > Django-allauth
-    path('accounts/', include('allauth.urls')),
     # > customer
     path('accounts/', include('customer.urls')),
 ]

@@ -34,12 +34,12 @@ class CustomSite(models.Model):
         ),
     )
 
-    class Meta:
+    class Meta:  # noqa
         abstract = False
         app_label = 'core'
         # db_table = ''
         verbose_name = _('Site')
         verbose_name_plural = _('Sites')
 
-    def __str__(self):
+    def __str__(self):  # noqa
         return _("Extension de '%s'") % self.site

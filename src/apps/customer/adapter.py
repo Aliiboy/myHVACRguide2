@@ -10,12 +10,12 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.translation import gettext_lazy as _
 # > Django-allauth
 from allauth.account.adapter import DefaultAccountAdapter
-# > Settings
-from myhvacrguide.settings import base as settings
 # > Models
 from core.models import (
     CustomSite,
 )
+# > Settings
+from myhvacrguide.settings import base as settings
 
 
 class MyAccountAdapter(DefaultAccountAdapter):

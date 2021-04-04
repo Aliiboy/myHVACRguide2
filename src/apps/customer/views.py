@@ -11,10 +11,83 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
+# > Views django-allauth
+from allauth.account.views import (
+    # SignupView,
+    # LoginView,
+    # ResetPasswordView,
+    # ResetPasswordKeyView,
+    PasswordChangeView,
+    # AddEmailView,
+)
 # > Forms
 from customer.forms import (
+    # SignupForm,
+    # LoginForm,
+    # ResetPasswordForm,
+    # ResetPasswordKeyForm,
+    MyChangePasswordForm,
+    # AddEmailForm,
     ProfileUpdateForm,
 )
+
+
+# class MySignupForm(SignupForm):
+#     """
+#     Django-allauth.
+
+#     Creation de compte utilisateur.
+
+#     """
+
+
+# class MyLoginForm(LoginForm):
+#     """
+#     Django-allauth.
+
+#     Connexion au compte utilisateur.
+
+#     """
+
+
+# class MyResetPasswordForm(ResetPasswordForm):
+#     """
+#     Django-allauth.
+
+#     Reinitialisation mot de passe via mail
+
+#     """
+
+
+# class MyResetPasswordKeyForm(ResetPasswordKeyForm):
+#     """
+#     Django-allauth.
+
+#     Reinitialisation du mot de passe via mail
+
+#     """
+
+
+class MyPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    """
+    Django-allauth.
+
+    Changement du mot de passe
+
+    """
+
+    form_class = MyChangePasswordForm
+    template_name = 'pages/customer/password_change.html'
+    success_url = reverse_lazy("customer:account_change_password")
+
+
+# class MyAddEmailForm(AddEmailForm):
+#     """
+#     Django-allauth.
+
+#     Changement d'e-mail
+
+#     """
 
 
 class ProfileUpdateView(LoginRequiredMixin, generic.FormView):

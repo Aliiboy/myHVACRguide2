@@ -3,7 +3,7 @@
 
 {% user_display user as user_display %}
 
-{% url 'customer:account_settings' as account_settings %}
+{% url 'customer:profile_update' as profile_update %}
 
 {# Header #}
 {# Navbar-account #}
@@ -20,7 +20,7 @@
           {# Dropdown #}
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown01">
             {# Items #}
-            <li><a class="dropdown-item" href="{{ account_settings }}">
+            <li><a class="dropdown-item" href="{{ profile_update }}">
               <i class="fas fa-cog"></i>{% trans "Parametres" %}</a></li>
             {# Items #}
           </ul>

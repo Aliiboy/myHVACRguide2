@@ -14,16 +14,10 @@ Froid et du Conditionnement d'air" %}{% endblock %}
 {# Block de la page #}
 {# ---------------------------------------------- #}
 {% block content %}
+{% include 'components/nav_and_tabs/customer_profile_update_menu.html' %}
 
-{% url 'customer:profile_update' as profile_update %}
-{% url 'account_change_password' as account_change_password %}
-
-<nav class="col col-2 nav flex-column nav-pills p-0 border-end">
-  <a class="nav-link active" href="{{ profile_update }}">{% trans "Profil" %}</a>
-  <a class="nav-link" href="{{ account_change_password }}">{% trans "Mot de passe" %}</a>
-</nav>
 <div class="col px-5 py-0">
-  {# Formulaire #}
+  {# Formulaire - Edition du profil #}
   {# ---------------------------------------------- #}
   <form action="{{ profile_update }}" class="row g-3" method="post" novalidate>
     {% csrf_token %}
