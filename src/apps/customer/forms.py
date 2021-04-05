@@ -21,21 +21,19 @@ from allauth.account.forms import (
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (
         Layout,
-        Fieldset,
         Row,
         Column,
-        Field,
         Submit,
 )
 # > Django-recaptcha
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
-# > Settings
-from myhvacrguide.settings import base as settings
 # > Models
 from customer.models import (
         CustomUser,
 )
+# > Settings
+from myhvacrguide.settings import base as settings  # noqa
 
 
 class MySignupForm(SignupForm):
@@ -49,7 +47,7 @@ class MySignupForm(SignupForm):
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
     field_order = ['email', 'email2', 'password1', 'password2', 'captcha']
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):  # noqa
         super(MySignupForm, self).__init__(*args, **kwargs)
         # > Allauth : Email
         self.fields['email'].label = _('Adresse e-mail')
@@ -106,7 +104,7 @@ class MyLoginForm(LoginForm):
 
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):  # noqa
         super(MyLoginForm, self).__init__(*args, **kwargs)
         # > Allauth : Email
         self.fields['login'].label = _('Adresse e-mail')
@@ -128,7 +126,7 @@ class MyLoginForm(LoginForm):
         self.fields['captcha'].widget.attrs.update(
             {
                 'data-callback': 'enableSubmitBtn',
-                'data-theme': 'light',
+                # 'data-theme': 'light',
                 'data-size': 'normal',
             }
         )
@@ -144,7 +142,7 @@ class MyResetPasswordForm(ResetPasswordForm):
 
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):  # noqa
         super(MyResetPasswordForm, self).__init__(*args, **kwargs)
         # > Allauth : Email
         self.fields['email'].label = _('Adresse e-mail')
@@ -164,7 +162,7 @@ class MyResetPasswordKeyForm(ResetPasswordKeyForm):
 
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):  # noqa
         super(MyResetPasswordKeyForm, self).__init__(*args, **kwargs)
         # > Allauth : Mot de passe
         self.fields['password1'].label = _('Mot de passe')
@@ -192,7 +190,7 @@ class MyChangePasswordForm(ChangePasswordForm):
 
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):  # noqa
         super(MyChangePasswordForm, self).__init__(*args, **kwargs)
         # > Allauth : Mot de passe actuel
         self.fields['oldpassword'].label = _('Mot de passe actuel')
@@ -228,8 +226,8 @@ class MyAddEmailForm(AddEmailForm):
 
     """
 
-    def __init__(self, *args, **kwargs):
-        super(AddEmailForm, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):  # noqa
+        super(MyAddEmailForm, self).__init__(*args, **kwargs)
         # > Allauth : Email
         self.fields['email'].label = _('Ajouter une adresse e-mail')
         self.fields['email'].widget.attrs.update(
@@ -256,7 +254,7 @@ class MyAddEmailForm(AddEmailForm):
                     Submit('action_add',
                            _('Ajouter un e-mail'),
                            css_class='btn btn-success'),
-                    css_class='form-group mt-auto col-xl-4 col-lg-4 col-md-5 col-sm-5'),
+                    css_class='form-group mt-auto col-xl-4 col-lg-4 col-md-5 col-sm-5'),  # noqa
                 css_class='',
             ),
 
@@ -270,13 +268,12 @@ class ProfileUpdateForm(ModelForm):
     Edition du profil utilisateur
     """
 
-    def __init__(self, user, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):  # noqa
         self.customuser = user
         kwargs['instance'] = user
         super(ProfileUpdateForm, self).__init__(*args, **kwargs)
 
-
-    class Meta:
+    class Meta:  # noqa
         model = CustomUser
         # exclude = ('user',)
         fields = ['last_name', 'first_name', ]

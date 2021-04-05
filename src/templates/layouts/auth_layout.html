@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load compress %}
+
+
+{# CSS et SCSS #}
+{# ---------------------------------------------- #}
+{# Application #}
+{% block app_styles %}
+  {% compress css %}
+  <link type="text/x-scss" href="{% static "scss/core.scss" %}" rel="stylesheet" media="screen">
+  {% endcompress %}
+{% endblock app_styles %}
+
+
+{# UI Layout #}
+{# ---------------------------------------------- #}
+{% block app_layout %}
+  <main class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-5 py-5">
+      {# Changement du Head #}
+      {# ---------------------------------------------- #}
+      <div class="col-lg-7 text-center text-lg-start">
+        <h1 class="display-4 fw-bold lh-1 mb-3">
+          {% block headertitle %}{% endblock %}</h1>
+        <p class="col-lg-10 fs-4">
+          {% block headertext %}{% endblock %}
+        </p>
+      </div> <!-- col -->
+      <div class="col-10 mx-auto col-lg-5">
+        {# Block de la page #}
+        {# ---------------------------------------------- #}
+        {% block content %}{% endblock content %}
+      </div> <!-- col -->
+    </div> <!-- row -->
+    </div> <!-- container -->
+  </main>
+{% endblock app_layout %}
+
+
+{# Block des scripts JS application. #}
+{# ---------------------------------------------- #}
+{% block app_scripts %}
+  <script src="{% static "js/core.js" %}"></script>
+{% endblock app_scripts %}

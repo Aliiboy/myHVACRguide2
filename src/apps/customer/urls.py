@@ -19,8 +19,8 @@ Including another URLconf
 from django.urls import path
 # > Vues
 from customer.views import (
-    # SignupView,
-    # LoginView,
+    MySignupView,
+    MyLoginView,
     # ResetPasswordView,
     # ResetPasswordKeyView,
     MyPasswordChangeView,
@@ -32,8 +32,8 @@ from customer.views import (
 app_name = 'customer'
 urlpatterns = [
     # > Django-allauth
-    # path("signup/", views.signup, name="account_signup"),
-    # path("login/", views.login, name="account_login"),
+    path("signup/", MySignupView.as_view(), name="account_signup"),
+    path("login/", MyLoginView.as_view(), name="account_login"),
     # path("logout/", views.logout, name="account_logout"),
     path('password/change/', MyPasswordChangeView.as_view(),
          name='account_change_password',

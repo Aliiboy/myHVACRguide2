@@ -7,14 +7,22 @@ Vues
 # > Django
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
-# > Views django-allauth
+# > Django-allauth Utils
+from allauth.utils import (
+    get_request_param,
+)
+from allauth.account.utils import (
+    passthrough_next_redirect_url,
+)
+# > Django-allauth Views
 from allauth.account.views import (
-    # SignupView,
-    # LoginView,
+    SignupView,
+    LoginView,
     # ResetPasswordView,
     # ResetPasswordKeyView,
     PasswordChangeView,
@@ -22,8 +30,8 @@ from allauth.account.views import (
 )
 # > Forms
 from customer.forms import (
-    # SignupForm,
-    # LoginForm,
+    MySignupForm,
+    MyLoginForm,
     # ResetPasswordForm,
     # ResetPasswordKeyForm,
     MyChangePasswordForm,
@@ -32,22 +40,48 @@ from customer.forms import (
 )
 
 
-# class MySignupForm(SignupForm):
-#     """
-#     Django-allauth.
+class MySignupView(SignupView):
+    """
+    Django-allauth.
 
-#     Creation de compte utilisateur.
+    Creation de compte utilisateur.
 
-#     """
+    """
+
+    template_name = 'pages/customer/login.html'
+    form_class = MySignupForm
+    redirect_field_name = "next"
+    success_url = None
 
 
-# class MyLoginForm(LoginForm):
-#     """
-#     Django-allauth.
+class MyLoginView(LoginView):
+    """
+    Django-allauth.
 
-#     Connexion au compte utilisateur.
+    Connexion au compte utilisateur.
 
-#     """
+    """
+
+    form_class = MyLoginForm
+    template_name = 'pages/customer/login.html'
+    success_url = None
+    redirect_field_name = "next"
+
+    def get_context_data(self, **kwargs):  # noqa
+        # Laisser LoginView et non MyLoginView
+        ret = super(LoginView, self).get_context_data(**kwargs)
+        signup_url = passthrough_next_redirect_url(self.request,
+                                                   reverse("customer:account_signup"),  # noqa
+                                                   self.redirect_field_name)
+        redirect_field_value = get_request_param(self.request,
+                                                 self.redirect_field_name)
+        site = get_current_site(self.request)
+
+        ret.update({"signup_url": signup_url,
+                    "site": site,
+                    "redirect_field_name": self.redirect_field_name,
+                    "redirect_field_value": redirect_field_value})
+        return ret
 
 
 # class MyResetPasswordForm(ResetPasswordForm):

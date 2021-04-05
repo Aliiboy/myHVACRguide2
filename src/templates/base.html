@@ -22,8 +22,7 @@
 
     {# Onglet #}
     {# ---------------------------------------------- #}
-    {% comment %} <title>{% block head_title %}{% endblock %} | {{ site_name }}</title> {% endcomment %}
-    <title>{% block head_title %}{% endblock %} · myHVACR guide</title>
+    <title>{% block head_title %}{% endblock %} | {{ site_name }}</title>
 
     {# Icone Onglet #}
     {% block favicon %}
@@ -48,7 +47,7 @@
 </head>
 
 
-<body >
+<body class="bg-light">
     {# Layout #}
     {# ---------------------------------------------- #}
     {% block app_layout %}{% endblock %}

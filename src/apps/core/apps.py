@@ -16,3 +16,7 @@ class CoreConfig(AppConfig):
     """
 
     name = 'core'
+
+
+# > Settings
+CORE_SITE_NAME = 'myHVACR'

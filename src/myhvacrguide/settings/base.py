@@ -89,6 +89,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # > Ajout apps
+                'core.context_processors.metadata',
             ],
         },
     },
@@ -202,7 +204,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 AUTH_USER_MODEL = 'customer.CustomUser'
-LOGIN_REDIRECT_URL = 'core:becenter'
+LOGIN_REDIRECT_URL = 'customer:profile_update'
 
 ###############################################################################
 # Django-allauth
