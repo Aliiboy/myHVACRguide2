@@ -196,7 +196,7 @@ class MyChangePasswordForm(ChangePasswordForm):
         self.fields['oldpassword'].label = _('Mot de passe actuel')
         self.fields['oldpassword'].widget.attrs.update(
             {
-                # 'class': 'bg-dark',
+                'class': 'form-control',
                 'placeholder': _('Entrez votre mot de passe'),
             }
         )
@@ -204,7 +204,7 @@ class MyChangePasswordForm(ChangePasswordForm):
         self.fields['password1'].label = _('Nouveau mot de passe')
         self.fields['password1'].widget.attrs.update(
             {
-                # 'class': 'bg-dark',
+                'class': 'form-control',
                 'placeholder': _('Nouveau votre mot de passe'),
             }
         )
@@ -212,7 +212,7 @@ class MyChangePasswordForm(ChangePasswordForm):
         self.fields['password2'].label = _('Nouveau votre mot de passe')
         self.fields['password2'].widget.attrs.update(
             {
-                # 'class': 'bg-dark',
+                'class': 'form-control',
                 'placeholder': _('Nouveau votre mot de passe'),
             }
         )
@@ -272,6 +272,22 @@ class ProfileUpdateForm(ModelForm):
         self.customuser = user
         kwargs['instance'] = user
         super(ProfileUpdateForm, self).__init__(*args, **kwargs)
+        # > Nom
+        self.fields['last_name'].label = _('Nom')
+        self.fields['last_name'].widget.attrs.update(
+            {
+                'class': 'form-control',
+                'placeholder': _('Entrez votre nom'),
+            }
+        )
+        # > Prenom
+        self.fields['first_name'].label = _('Prenom')
+        self.fields['first_name'].widget.attrs.update(
+            {
+                'class': 'form-control',
+                'placeholder': _('Entrez votre prenom'),
+            }
+        )
 
     class Meta:  # noqa
         model = CustomUser

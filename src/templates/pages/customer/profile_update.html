@@ -21,17 +21,30 @@ Froid et du Conditionnement d'air" %}{% endblock %}
 {% block content %}
   {# Formulaire - Edition du profil #}
   {# ---------------------------------------------- #}
-  <form action="{{ profile_update }}" class="row g-3" method="post" novalidate>
+  {% if form.errors %}
+    <form action="{{ profile_update }}" class="needs-validation was-validated" method="post" novalidate>
+  {% else %}
+    <form action="{{ profile_update }}" class="needs-validation" method="post" novalidate>
+  {% endif %}
     {% csrf_token %}
-    <!-- <legend>{% trans "Edition du profil" %}</legend> -->
-    {# Nom #}
+    <!-- <legend>{% trans "Changement du mot de passe" %}</legend> -->
+    {% for field in form %}
     <div class="col">
-      {{ form.last_name|as_crispy_field }}
-    </div> <!-- form field -->
-    {# Prenom #}
-    <div class="col">
-      {{ form.first_name|as_crispy_field }}
-    </div> <!-- form field -->
+      <div class="form-floating mb-3" aria-required={% if field.field.required %}"true"{% else %}"false"{% endif %}>
+          {{ field }}
+          {{ field.label_tag }}
+          {% comment %} {% if field.field.required %}<span class="required">*</span>{% endif %} {% endcomment %}
+          {% if field.help_text %}
+            <p class="form-text">{{ field.help_text|safe }}</p>
+          {% endif %}
+          {% for error in field.errors %}
+          <div class="invalid-feedback">
+            {{ error|escape }}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
     {# Validation #}
     <div class="col-12">
       <button type="submit" class="btn btn-success">{% trans "Mettre à jour le profil" %}</button>
