@@ -48,6 +48,8 @@ class MySignupForm(SignupForm):
     field_order = ['email', 'email2', 'password1', 'password2', 'captcha']
 
     def __init__(self, *args, **kwargs):  # noqa
+        # > Django : Supprimer le suffix ":" des label
+        kwargs.setdefault('label_suffix', '')
         super(MySignupForm, self).__init__(*args, **kwargs)
         # > Allauth : Email
         self.fields['email'].label = _('Adresse e-mail')
@@ -105,12 +107,14 @@ class MyLoginForm(LoginForm):
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
 
     def __init__(self, *args, **kwargs):  # noqa
+        # > Django : Supprimer le suffix ":" des label
+        kwargs.setdefault('label_suffix', '')
         super(MyLoginForm, self).__init__(*args, **kwargs)
         # > Allauth : Email
         self.fields['login'].label = _('Adresse e-mail')
         self.fields['login'].widget.attrs.update(
             {
-                # 'class': 'bg-dark',
+                'class': 'form-control',
                 'placeholder': _('Entrez votre e-mail'),
             }
         )
@@ -118,7 +122,7 @@ class MyLoginForm(LoginForm):
         self.fields['password'].label = _('Mot de passe')
         self.fields['password'].widget.attrs.update(
             {
-                # 'class': 'bg-dark',
+                'class': 'form-control',
                 'placeholder': _('Entrez votre mot de passe'),
             }
         )
@@ -132,6 +136,11 @@ class MyLoginForm(LoginForm):
         )
         # > Allauth : Se souvenir de moir
         self.fields['remember'].label = _('Se souvenir de moi')
+        self.fields['remember'].widget.attrs.update(
+            {
+                'class': 'form-check-input',
+            }
+        )
 
 
 class MyResetPasswordForm(ResetPasswordForm):
@@ -143,6 +152,8 @@ class MyResetPasswordForm(ResetPasswordForm):
     """
 
     def __init__(self, *args, **kwargs):  # noqa
+        # > Django : Supprimer le suffix ":" des label
+        kwargs.setdefault('label_suffix', '')
         super(MyResetPasswordForm, self).__init__(*args, **kwargs)
         # > Allauth : Email
         self.fields['email'].label = _('Adresse e-mail')
@@ -163,6 +174,8 @@ class MyResetPasswordKeyForm(ResetPasswordKeyForm):
     """
 
     def __init__(self, *args, **kwargs):  # noqa
+        # > Django : Supprimer le suffix ":" des label
+        kwargs.setdefault('label_suffix', '')
         super(MyResetPasswordKeyForm, self).__init__(*args, **kwargs)
         # > Allauth : Mot de passe
         self.fields['password1'].label = _('Mot de passe')
@@ -191,6 +204,8 @@ class MyChangePasswordForm(ChangePasswordForm):
     """
 
     def __init__(self, *args, **kwargs):  # noqa
+        # > Django : Supprimer le suffix ":" des label
+        kwargs.setdefault('label_suffix', '')
         super(MyChangePasswordForm, self).__init__(*args, **kwargs)
         # > Allauth : Mot de passe actuel
         self.fields['oldpassword'].label = _('Mot de passe actuel')
@@ -227,6 +242,8 @@ class MyAddEmailForm(AddEmailForm):
     """
 
     def __init__(self, *args, **kwargs):  # noqa
+        # > Django : Supprimer le suffix ":" des label
+        kwargs.setdefault('label_suffix', '')
         super(MyAddEmailForm, self).__init__(*args, **kwargs)
         # > Allauth : Email
         self.fields['email'].label = _('Ajouter une adresse e-mail')
@@ -269,6 +286,8 @@ class ProfileUpdateForm(ModelForm):
     """
 
     def __init__(self, user, *args, **kwargs):  # noqa
+        # > Django : Supprimer le suffix ":" des label
+        kwargs.setdefault('label_suffix', '')
         self.customuser = user
         kwargs['instance'] = user
         super(ProfileUpdateForm, self).__init__(*args, **kwargs)

@@ -92,3 +92,5 @@ dream w : faire meme principe de andt sur edition du profil
     ajout ou changement d'email
     modification de mot de pass
     tout les templates accounts
+
+- Penser a desinstaller cryspi quand tout sera basculer

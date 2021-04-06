@@ -21,6 +21,7 @@ from django.urls import path
 from customer.views import (
     MySignupView,
     MyLoginView,
+    MyLogoutView,
     # ResetPasswordView,
     # ResetPasswordKeyView,
     MyPasswordChangeView,
@@ -34,7 +35,7 @@ urlpatterns = [
     # > Django-allauth
     path("signup/", MySignupView.as_view(), name="account_signup"),
     path("login/", MyLoginView.as_view(), name="account_login"),
-    # path("logout/", views.logout, name="account_logout"),
+    path("logout/", MyLogoutView.as_view(), name="account_logout"),
     path('password/change/', MyPasswordChangeView.as_view(),
          name='account_change_password',
          ),

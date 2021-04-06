@@ -4,6 +4,8 @@
 {% user_display user as user_display %}
 
 {% url 'customer:profile_update' as profile_update %}
+{% url 'customer:account_logout' as account_logout %}
+
 
 {# Header #}
 {# Navbar-account #}
@@ -22,7 +24,11 @@
             {# Items #}
             <li><a class="dropdown-item" href="{{ profile_update }}">
               <i class="fas fa-cog"></i>{% trans "Parametres" %}</a></li>
+            {# Separation #}
+            <li><hr class="dropdown-divider"></li>
             {# Items #}
+            <li><a class="dropdown-item" href="{{ account_logout }}">
+              <i class="fas fa-sign-out-alt"></i>{% trans "Se déconnecter" %}</a></li>
           </ul>
         </li> <!-- nav-item dropdown -->
       </ul> <!-- navbar-nav -->

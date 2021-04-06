@@ -13,7 +13,7 @@
 Froid et du Conditionnement d'air" %}{% endblock %}
 
 
-# Changement du Head #}
+{# Changement du Head #}
 {# ---------------------------------------------- #}
 {% block headertitle %} {{ site_name }} {% endblock %}
 
@@ -25,43 +25,87 @@ Froid et du Conditionnement d'air" %}{% endblock %}
 {% block content %}
   {# Formulaire - Connexion #}
   {# ---------------------------------------------- #}
-  <form action="{{ account_login }}" class="p-5 border rounded-3 bg-light" method="post" novalidate>
-    {% csrf_token %}
-    {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-    <!-- <legend>{% trans "Connexion" %}</legend> -->
-    {# Email #}
-    <div class="mb-3">
-      {{ form.login|as_crispy_field }}
+  {% if form.errors %}
+    <form action="{{ account_login }}" class="p-5 border rounded-3 bg-light needs-validation was-validated" method="post" novalidate>
+    {# FormValidationError #}
+    {% for error in form.non_field_errors %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        </button>
+        {{ error }}
+      </div>
+    {% endfor %}
+    
+  {% else %}
+    <form action="{{ account_login }}" class=" p-5 border rounded-3 bg-light needs-validation" method="post" novalidate>
+  {% endif %}
+
+  {% csrf_token %}
+  {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <!-- <legend>{% trans "Connexion" %}</legend> -->
+  
+  {# Email #}
+  <div class="col-md-12">
+    <div class="form-floating mb-3">
+      {{ form.login }}
+      {{ form.login.label_tag }}
+      <p class="form-text">{{ form.login.help_text|safe }}</p>
+      {% for error in form.login.errors %}
+        <div class="invalid-feedback">{{ error|escape }}</div>
+      {% endfor %}
     </div> <!-- form field -->
-    {# Mot de passe #}
-    <div class="mb-3">
-      {{ form.password|as_crispy_field }}
+  </div> <!-- col -->
+
+  {# Mot de passe #}
+  <div class="col-md-12">
+    <div class="form-floating mb-3">
+      {{ form.password }}
+      {{ form.password.label_tag }}
+      <p class="form-text">{{ form.password.help_text|safe }}</p>
+      {% for error in form.password.errors %}
+        <div class="invalid-feedback">{{ error|escape }}</div>
+      {% endfor %}    </div> <!-- form field -->
+  </div> <!-- col -->
+
+  {# Remember #}
+  <div class="col-md-12">
+    <div class="form-check mb-3">
+      {{ form.remember }}
+      <label class="form-check-label">
+        {{ form.remember.label_tag }}
+      </label>
     </div> <!-- form field -->
-    {# Remember #}
-    <div class="mb-3">
-      {{ form.remember|as_crispy_field }}
+  </div> <!-- col -->
+
+  {# Recaptcha #}
+  <div class="col-md-12">
+    <div class="mb-3 d-flex justify-content-center">
+      {{ form.captcha }}
     </div> <!-- form field -->
-    {# Recaptcha #}
-    <div class="mb-3">
-      {{ form.captcha|as_crispy_field }}
-    </div> <!-- form field -->
-    {# Validation #}
-    <div class="mb-3">
-      <button type="submit" id="recaptcha-submit" disabled="disabled"
-      class="w-100 btn btn-lg btn-primary">{% trans "Se connecter" %}</button>
-    </div> <!-- form field -->
-    {# Mot de passe oublié #}
-    <p class="form-text text-muted text-center mb-0"> <a href="/">
-      {% trans "Mot de passe oublié ?" %}</a></p>
-    <hr class="my-4">
-    {# Mot de passe oublié #}
-    <small class="text-muted">
-      {% blocktrans %}
-        Nouveau sur myHVACR ?
-        <a href="{{ signup_url }}">Créer un compte</a>
-      {% endblocktrans %}
-    </small>
+  </div> <!-- col -->
+
+  {# Validation #}
+  <div class="mb-3">
+    <button type="submit"
+    id="recaptcha-submit" disabled="disabled"
+    class="w-100 btn btn-lg btn-primary">{% trans "Se connecter" %}</button>
+  </div> <!-- form field -->
+
+  {# Mot de passe oublié #}
+  <p class="form-text text-muted text-center mb-0"> <a href="/">
+    {% trans "Mot de passe oublié ?" %}</a>
+  </p>
+  <hr class="my-4">
+
+  {# Inscription #}
+  <small class="text-muted">
+    {% blocktrans %}
+      Nouveau sur myHVACR ?
+      <a href="{{ signup_url }}">Créer un compte</a>
+    {% endblocktrans %}
+  </small>
   </form>
+
 {% endblock content %}

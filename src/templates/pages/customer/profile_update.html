@@ -1,7 +1,6 @@
 {% extends "layouts/customer_layout.html" %}
 
 {% load i18n %}
-{% load crispy_forms_tags %}
 
 
 {# Changement du Head HTML #}
@@ -22,32 +21,36 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Formulaire - Edition du profil #}
   {# ---------------------------------------------- #}
   {% if form.errors %}
-    <form action="{{ profile_update }}" class="needs-validation was-validated" method="post" novalidate>
+    <form action="{{ profile_update }}" class="row g-3 needs-validation was-validated" method="post" novalidate>
   {% else %}
-    <form action="{{ profile_update }}" class="needs-validation" method="post" novalidate>
+    <form action="{{ profile_update }}" class="row g-3 needs-validation" method="post" novalidate>
   {% endif %}
-    {% csrf_token %}
-    <!-- <legend>{% trans "Changement du mot de passe" %}</legend> -->
-    {% for field in form %}
-    <div class="col">
+  {% csrf_token %}
+  <!-- <legend>{% trans "Changement du mot de passe" %}</legend> -->
+
+  {# Boucle sur les Fields #}
+  {% for field in form %}
+    <div class="col-md-6">
       <div class="form-floating mb-3" aria-required={% if field.field.required %}"true"{% else %}"false"{% endif %}>
-          {{ field }}
-          {{ field.label_tag }}
-          {% comment %} {% if field.field.required %}<span class="required">*</span>{% endif %} {% endcomment %}
-          {% if field.help_text %}
-            <p class="form-text">{{ field.help_text|safe }}</p>
-          {% endif %}
-          {% for error in field.errors %}
+        {{ field }}
+        {{ field.label_tag }}
+        {% if field.help_text %}
+          <p class="form-text">{{ field.help_text|safe }}</p>
+        {% endif %}
+        {% for error in field.errors %}
           <div class="invalid-feedback">
             {{ error|escape }}
           </div>
         {% endfor %}
       </div>
     </div>
-    {% endfor %}
+  {% endfor %}
+
     {# Validation #}
     <div class="col-12">
-      <button type="submit" class="btn btn-success">{% trans "Mettre à jour le profil" %}</button>
+      <button type="submit"
+      class="btn btn-success">{% trans "Mettre à jour le profil" %}</button>
     </div> <!-- form field -->
-  </form>
+    </form>
+  
 {% endblock content %}

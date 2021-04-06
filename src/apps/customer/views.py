@@ -23,6 +23,7 @@ from allauth.account.utils import (
 from allauth.account.views import (
     SignupView,
     LoginView,
+    LogoutView,
     # ResetPasswordView,
     # ResetPasswordKeyView,
     PasswordChangeView,
@@ -69,7 +70,7 @@ class MyLoginView(LoginView):
 
     def get_context_data(self, **kwargs):  # noqa
         # Laisser LoginView et non MyLoginView
-        ret = super(LoginView, self).get_context_data(**kwargs)
+        ret = super(LoginView, self).get_context_data(**kwargs)  # noqa
         signup_url = passthrough_next_redirect_url(self.request,
                                                    reverse("customer:account_signup"),  # noqa
                                                    self.redirect_field_name)
@@ -82,6 +83,18 @@ class MyLoginView(LoginView):
                     "redirect_field_name": self.redirect_field_name,
                     "redirect_field_value": redirect_field_value})
         return ret
+
+
+class MyLogoutView(LogoutView):
+    """
+    Django-allauth.
+
+    Se deconnecter du compte utilisateur.
+
+    """
+
+    template_name = 'pages/customer/logout.html'
+    redirect_field_name = "next"
 
 
 # class MyResetPasswordForm(ResetPasswordForm):

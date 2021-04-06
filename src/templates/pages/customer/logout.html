@@ -1,0 +1,41 @@
+{% extends "layouts/auth_layout.html" %}
+
+{% load i18n %}
+
+{% url 'customer:account_logout' as account_logout %}
+
+
+{# Changement du Head HTML #}
+{# ---------------------------------------------- #}
+{% block head_title %}{% trans "Se déconnecter" %}{% endblock %}
+{% block description %}{% trans "Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
+Froid et du Conditionnement d'air" %}{% endblock %}
+
+
+{# Changement du Head #}
+{# ---------------------------------------------- #}
+{% block headertitle %} {{ site_name }} {% endblock %}
+
+{% block headertext %} {% trans "A bientôt..." %} {% endblock %}
+
+
+{# Block de la page #}
+{# ---------------------------------------------- #}
+{% block content %}
+  {# Formulaire - Se déconnecter #}
+  {# ---------------------------------------------- #}
+  <form action="{{ account_logout }}" class="p-5 border rounded-3 bg-light" method="post" novalidate>
+    {% csrf_token %}
+    {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <!-- <legend>{% trans "Se déconnecter" %}</legend> -->
+  
+    {# Validation #}
+    <div class="mb-3">
+      <button type="submit"
+      class="w-100 btn btn-lg btn-danger">{% trans "Se déconnecter" %}</button>
+    </div> <!-- form field -->
+  </form>
+
+{% endblock content %}
