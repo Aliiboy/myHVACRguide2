@@ -9,7 +9,6 @@ window.setTimeout(() => {
 }, 3000)
 
 
-
 /* Captcha
 -------------------------------------------------- */
 
@@ -17,3 +16,12 @@ window.setTimeout(() => {
 function enableSubmitBtn() {
     document.getElementById("recaptcha-submit").disabled = false;
 }
+
+
+/* Auth
+-------------------------------------------------- */
+/* Log out Submit avec un click event */
+function signOutLink() {
+  document.getElementById("#signOutBtn").click();
+}
+

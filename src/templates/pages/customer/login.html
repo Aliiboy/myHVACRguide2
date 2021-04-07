@@ -25,9 +25,9 @@ Froid et du Conditionnement d'air" %}{% endblock %}
 {% block content %}
   {# Formulaire - Connexion #}
   {# ---------------------------------------------- #}
+  {# FormValidationError #}
   {% if form.errors %}
     <form action="{{ account_login }}" class="p-5 border rounded-3 bg-light needs-validation was-validated" method="post" novalidate>
-    {# FormValidationError #}
     {% for error in form.non_field_errors %}
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">

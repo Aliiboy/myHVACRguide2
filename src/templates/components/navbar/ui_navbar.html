@@ -23,13 +23,21 @@
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown01">
             {# Items #}
             <li><a class="dropdown-item" href="{{ profile_update }}">
-              <i class="fas fa-cog"></i>{% trans "Parametres" %}</a></li>
+                <i class="fas fa-cog"></i>{% trans "Parametres" %}</a></li>
             {# Separation #}
             <li><hr class="dropdown-divider"></li>
             {# Items #}
-            <li><a class="dropdown-item" href="{{ account_logout }}">
-              <i class="fas fa-sign-out-alt"></i>{% trans "Se déconnecter" %}</a></li>
-          </ul>
+            <li><button class="dropdown-item" onclick="signOutLink()">
+                <i class="fas fa-sign-out-alt"></i>{% trans "Se déconnecter" %}</button></li>
+            {# Items #}
+            <li><form style='display: none;' method="post" action="{{ account_logout }}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <button id="#signOutBtn" type="submit">{% trans "Se déconnecter" %}</button>
+              </form></li>
+          </ul> <!-- dropdown-menu -->
         </li> <!-- nav-item dropdown -->
       </ul> <!-- navbar-nav -->
     </div> <!-- navbar-collapse -->
