@@ -12,9 +12,9 @@ from django.forms import ModelForm
 from allauth.account.forms import (
     SignupForm,
     LoginForm,
+    ChangePasswordForm,
     ResetPasswordForm,
     ResetPasswordKeyForm,
-    ChangePasswordForm,
     AddEmailForm,
 )
 # > Crispy Forms
@@ -143,6 +143,44 @@ class MyLoginForm(LoginForm):
         )
 
 
+class MyChangePasswordForm(ChangePasswordForm):
+    """
+    Django-allauth.
+
+    Changement du mot de passe
+
+    """
+
+    def __init__(self, *args, **kwargs):  # noqa
+        # > Django : Supprimer le suffix ":" des label
+        kwargs.setdefault('label_suffix', '')
+        super(MyChangePasswordForm, self).__init__(*args, **kwargs)
+        # > Allauth : Mot de passe actuel
+        self.fields['oldpassword'].label = _('Mot de passe actuel')
+        self.fields['oldpassword'].widget.attrs.update(
+            {
+                'class': 'form-control',
+                'placeholder': _('Entrez votre mot de passe'),
+            }
+        )
+        # > Allauth : Mot de passe
+        self.fields['password1'].label = _('Nouveau mot de passe')
+        self.fields['password1'].widget.attrs.update(
+            {
+                'class': 'form-control',
+                'placeholder': _('Nouveau votre mot de passe'),
+            }
+        )
+        # > Allauth : Mot de passe de confirmation
+        self.fields['password2'].label = _('Nouveau votre mot de passe')
+        self.fields['password2'].widget.attrs.update(
+            {
+                'class': 'form-control',
+                'placeholder': _('Nouveau votre mot de passe'),
+            }
+        )
+
+
 class MyResetPasswordForm(ResetPasswordForm):
     """
     Django-allauth.
@@ -191,44 +229,6 @@ class MyResetPasswordKeyForm(ResetPasswordKeyForm):
             {
                 # 'class': 'bg-dark',
                 'placeholder': _('Entrez votre mot de passe'),
-            }
-        )
-
-
-class MyChangePasswordForm(ChangePasswordForm):
-    """
-    Django-allauth.
-
-    Changement du mot de passe
-
-    """
-
-    def __init__(self, *args, **kwargs):  # noqa
-        # > Django : Supprimer le suffix ":" des label
-        kwargs.setdefault('label_suffix', '')
-        super(MyChangePasswordForm, self).__init__(*args, **kwargs)
-        # > Allauth : Mot de passe actuel
-        self.fields['oldpassword'].label = _('Mot de passe actuel')
-        self.fields['oldpassword'].widget.attrs.update(
-            {
-                'class': 'form-control',
-                'placeholder': _('Entrez votre mot de passe'),
-            }
-        )
-        # > Allauth : Mot de passe
-        self.fields['password1'].label = _('Nouveau mot de passe')
-        self.fields['password1'].widget.attrs.update(
-            {
-                'class': 'form-control',
-                'placeholder': _('Nouveau votre mot de passe'),
-            }
-        )
-        # > Allauth : Mot de passe de confirmation
-        self.fields['password2'].label = _('Nouveau votre mot de passe')
-        self.fields['password2'].widget.attrs.update(
-            {
-                'class': 'form-control',
-                'placeholder': _('Nouveau votre mot de passe'),
             }
         )
 

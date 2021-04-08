@@ -22,9 +22,10 @@ from customer.views import (
     MySignupView,
     MyLoginView,
     MyLogoutView,
+    MyPasswordChangeView,
+    MyAccountInactiveView,
     # ResetPasswordView,
     # ResetPasswordKeyView,
-    MyPasswordChangeView,
     # AddEmailView,
     ProfileUpdateView,
 )
@@ -39,8 +40,9 @@ urlpatterns = [
     path('password/change/', MyPasswordChangeView.as_view(),
          name='account_change_password',
          ),
+    # Si auth par social provider
     # path("password/set/", views.password_set, name="account_set_password"),
-    # path("inactive/", views.account_inactive, name="account_inactive"),
+    path("inactive/", MyAccountInactiveView.as_view(), name="account_inactive"),
 
     # E-mail
     # path("email/", views.email, name="account_email"),

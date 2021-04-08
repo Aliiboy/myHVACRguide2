@@ -7,6 +7,8 @@ Modifie le comportement de Django-allauth
 # > Django
 from django import forms
 from django.contrib.sites.shortcuts import get_current_site
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 # > Django-allauth
 from allauth.account.adapter import DefaultAccountAdapter
@@ -58,3 +60,12 @@ class MyAccountAdapter(DefaultAccountAdapter):
             return email
         raise forms.ValidationError(_("Ce domaine e-mail n'est pas "
                                       "autorisé sur ce site."))
+
+    def respond_user_inactive(self, request, user):
+        """
+        Compte inactif.
+
+        Renvoie vers la page correspondante
+        """
+        return HttpResponseRedirect(
+            reverse('customer:account_inactive'))

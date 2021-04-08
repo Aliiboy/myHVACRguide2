@@ -24,18 +24,19 @@ from allauth.account.views import (
     SignupView,
     LoginView,
     LogoutView,
+    PasswordChangeView,
+    AccountInactiveView,
     # ResetPasswordView,
     # ResetPasswordKeyView,
-    PasswordChangeView,
     # AddEmailView,
 )
 # > Forms
 from customer.forms import (
     MySignupForm,
     MyLoginForm,
+    MyChangePasswordForm,
     # ResetPasswordForm,
     # ResetPasswordKeyForm,
-    MyChangePasswordForm,
     # AddEmailForm,
     ProfileUpdateForm,
 )
@@ -97,6 +98,30 @@ class MyLogoutView(LogoutView):
     redirect_field_name = "next"
 
 
+class MyPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    """
+    Django-allauth.
+
+    Changement du mot de passe
+
+    """
+
+    form_class = MyChangePasswordForm
+    template_name = 'pages/customer/password_change.html'
+    success_url = reverse_lazy("customer:account_change_password")
+
+
+class MyAccountInactiveView(AccountInactiveView):
+    """
+    Django-allauth.
+
+    Lorsque que le compte est inactif
+
+    """
+
+    template_name = 'pages/customer/account_inactive.html'
+
+
 # class MyResetPasswordForm(ResetPasswordForm):
 #     """
 #     Django-allauth.
@@ -113,19 +138,6 @@ class MyLogoutView(LogoutView):
 #     Reinitialisation du mot de passe via mail
 
 #     """
-
-
-class MyPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
-    """
-    Django-allauth.
-
-    Changement du mot de passe
-
-    """
-
-    form_class = MyChangePasswordForm
-    template_name = 'pages/customer/password_change.html'
-    success_url = reverse_lazy("customer:account_change_password")
 
 
 # class MyAddEmailForm(AddEmailForm):

@@ -77,6 +77,7 @@ https://www.legalplace.fr/contrats/conditions-generales-d-utilisation/creer/11
 https://django-termsandconditions.readthedocs.io/en/latest/#
 ### Accounts
 delete profile
+renommer app "customer" vers "??"
 ### template
 404
 403
