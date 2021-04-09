@@ -1,6 +1,7 @@
 {% extends "layouts/auth_layout.html" %}
 
 {% load i18n %}
+{% load widget_tweaks %}
 
 {% url 'customer:account_signup' as account_signup %}
 
@@ -25,7 +26,7 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Formulaire - Inscription #}
   {# ---------------------------------------------- #}
   {# FormValidationError #}
-  {% if form.errors %}
+    {% if form.errors %}
     <form action="{{ account_signup }}" class="p-5 border rounded-3 bg-light needs-validation was-validated" method="post" novalidate>
     {% for error in form.non_field_errors %}
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -48,7 +49,11 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Email #}
   <div class="col-md-12">
     <div class="form-floating mb-3">
-      {{ form.email }}
+      {% if form.email.errors %}
+        {{ form.email|add_class:'is-invalid' }}
+      {% else %}
+       {{ form.email }}
+      {% endif %}
       {{ form.email.label_tag }}
       <p class="form-text">{{ form.email.help_text|safe }}</p>
       {% for error in form.email.errors %}
@@ -60,7 +65,11 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Email 2 #}
   <div class="col-md-12">
     <div class="form-floating mb-3">
-      {{ form.email2 }}
+      {% if form.email2.errors %}
+        {{ form.email2|add_class:'is-invalid' }}
+      {% else %}
+       {{ form.email2 }}
+      {% endif %}
       {{ form.email2.label_tag }}
       <p class="form-text">{{ form.email2.help_text|safe }}</p>
       {% for error in form.email2.errors %}
@@ -72,7 +81,11 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Mot de passe #}
   <div class="col-md-12">
     <div class="form-floating mb-3">
-      {{ form.password1 }}
+      {% if form.password1.errors %}
+        {{ form.password1|add_class:'is-invalid' }}
+      {% else %}
+       {{ form.password1 }}
+      {% endif %}
       {{ form.password1.label_tag }}
       <p class="form-text">{{ form.password1.help_text|safe }}</p>
       {% for error in form.password1.errors %}
@@ -83,7 +96,11 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Mot de passe 2 #}
   <div class="col-md-12">
     <div class="form-floating mb-3">
-      {{ form.password2 }}
+      {% if form.password2.errors %}
+        {{ form.password2|add_class:'is-invalid' }}
+      {% else %}
+       {{ form.password2 }}
+      {% endif %}
       {{ form.password2.label_tag }}
       <p class="form-text">{{ form.password2.help_text|safe }}</p>
       {% for error in form.password2.errors %}

@@ -1,6 +1,7 @@
 {% extends "layouts/auth_layout.html" %}
 
 {% load i18n %}
+{% load widget_tweaks %}
 
 {% url 'customer:account_login' as account_login %}
 
@@ -48,7 +49,11 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Email #}
   <div class="col-md-12">
     <div class="form-floating mb-3">
-      {{ form.login }}
+      {% if form.login.errors %}
+        {{ form.login|add_class:'is-invalid' }}
+      {% else %}
+       {{ form.login }}
+      {% endif %}
       {{ form.login.label_tag }}
       <p class="form-text">{{ form.login.help_text|safe }}</p>
       {% for error in form.login.errors %}
@@ -60,7 +65,11 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Mot de passe #}
   <div class="col-md-12">
     <div class="form-floating mb-3">
-      {{ form.password }}
+      {% if form.password.errors %}
+        {{ form.password|add_class:'is-invalid' }}
+      {% else %}
+       {{ form.password }}
+      {% endif %}
       {{ form.password.label_tag }}
       <p class="form-text">{{ form.password.help_text|safe }}</p>
       {% for error in form.password.errors %}

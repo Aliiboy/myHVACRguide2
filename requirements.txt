@@ -16,7 +16,8 @@ django-compressor==2.4
 django-libsass==0.8
 # Rendu des formulaires
 django-crispy-forms==1.11.2
-
+# Ajuste le rendu des champs de formulaire
+django-widget-tweaks==1.4.8
 
 # > Heroku
 gunicorn==20.0.4

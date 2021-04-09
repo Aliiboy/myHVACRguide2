@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'captcha',
     # Rendu des formulaires
     'crispy_forms',
+    # Rendu des champs de formulaire
+    'widget_tweaks',
     # > App
     'apps.core.apps.CoreConfig',
     'apps.customer.apps.CustomerConfig',
