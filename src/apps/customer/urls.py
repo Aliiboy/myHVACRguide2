@@ -42,7 +42,9 @@ urlpatterns = [
          ),
     # Si auth par social provider
     # path("password/set/", views.password_set, name="account_set_password"),
-    path("inactive/", MyAccountInactiveView.as_view(), name="account_inactive"),
+    path("inactive/", MyAccountInactiveView.as_view(),
+         name="account_inactive",
+         ),
 
     # E-mail
     # path("email/", views.email, name="account_email"),

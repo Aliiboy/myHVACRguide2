@@ -2,12 +2,12 @@
 
 {% load i18n %}
 
-{% url 'customer:account_login' as account_login %}
+{% url 'customer:account_signup' as account_signup %}
 
 
 {# Changement du Head HTML #}
 {# ---------------------------------------------- #}
-{% block head_title %}{% trans "Connexion" %}{% endblock %}
+{% block head_title %}{% trans "Inscription" %}{% endblock %}
 {% block description %}{% trans "Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
 Froid et du Conditionnement d'air" %}{% endblock %}
 
@@ -16,27 +16,27 @@ Froid et du Conditionnement d'air" %}{% endblock %}
 {# ---------------------------------------------- #}
 {% block headertitle %} {{ site_name }} {% endblock %}
 
-{% block headertext %} {% trans "Connectez-vous..." %} {% endblock %}
+{% block headertext %} {% trans "Inscrivez-vous..." %} {% endblock %}
 
 
 {# Block de la page #}
 {# ---------------------------------------------- #}
 {% block content %}
-  {# Formulaire - Connexion #}
+  {# Formulaire - Inscription #}
   {# ---------------------------------------------- #}
   {# FormValidationError #}
   {% if form.errors %}
-    <form action="{{ account_login }}" class="p-5 border rounded-3 bg-light needs-validation was-validated" method="post" novalidate>
-      {% for error in form.non_field_errors %}
+    <form action="{{ account_signup }}" class="p-5 border rounded-3 bg-light needs-validation was-validated" method="post" novalidate>
+    {% for error in form.non_field_errors %}
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
         </button>
         {{ error }}
       </div>
     {% endfor %}
-    
+
   {% else %}
-    <form action="{{ account_login }}" class=" p-5 border rounded-3 bg-light needs-validation" method="post" novalidate>
+    <form action="{{ account_signup }}" class=" p-5 border rounded-3 bg-light needs-validation" method="post" novalidate>
   {% endif %}
 
   {% csrf_token %}
@@ -48,10 +48,22 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Email #}
   <div class="col-md-12">
     <div class="form-floating mb-3">
-      {{ form.login }}
-      {{ form.login.label_tag }}
-      <p class="form-text">{{ form.login.help_text|safe }}</p>
-      {% for error in form.login.errors %}
+      {{ form.email }}
+      {{ form.email.label_tag }}
+      <p class="form-text">{{ form.email.help_text|safe }}</p>
+      {% for error in form.email.errors %}
+        <div class="invalid-feedback">{{ error|escape }}</div>
+      {% endfor %}
+    </div> <!-- form field -->
+  </div> <!-- col -->
+
+  {# Email 2 #}
+  <div class="col-md-12">
+    <div class="form-floating mb-3">
+      {{ form.email2 }}
+      {{ form.email2.label_tag }}
+      <p class="form-text">{{ form.email2.help_text|safe }}</p>
+      {% for error in form.email2.errors %}
         <div class="invalid-feedback">{{ error|escape }}</div>
       {% endfor %}
     </div> <!-- form field -->
@@ -60,22 +72,23 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Mot de passe #}
   <div class="col-md-12">
     <div class="form-floating mb-3">
-      {{ form.password }}
-      {{ form.password.label_tag }}
-      <p class="form-text">{{ form.password.help_text|safe }}</p>
-      {% for error in form.password.errors %}
+      {{ form.password1 }}
+      {{ form.password1.label_tag }}
+      <p class="form-text">{{ form.password1.help_text|safe }}</p>
+      {% for error in form.password1.errors %}
         <div class="invalid-feedback">{{ error|escape }}</div>
       {% endfor %}    </div> <!-- form field -->
   </div> <!-- col -->
 
-  {# Remember #}
+  {# Mot de passe 2 #}
   <div class="col-md-12">
-    <div class="form-check mb-3">
-      {{ form.remember }}
-      <label class="form-check-label">
-        {{ form.remember.label_tag }}
-      </label>
-    </div> <!-- form field -->
+    <div class="form-floating mb-3">
+      {{ form.password2 }}
+      {{ form.password2.label_tag }}
+      <p class="form-text">{{ form.password2.help_text|safe }}</p>
+      {% for error in form.password2.errors %}
+        <div class="invalid-feedback">{{ error|escape }}</div>
+      {% endfor %}    </div> <!-- form field -->
   </div> <!-- col -->
 
   {# Recaptcha #}
@@ -89,13 +102,8 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   <div class="mb-3">
     <button type="submit"
     id="recaptcha-submit" disabled="disabled"
-    class="w-100 btn btn-lg btn-primary">{% trans "Se connecter" %}</button>
+    class="w-100 btn btn-lg btn-primary">{% trans "Créer un compte" %}</button>
   </div> <!-- form field -->
-
-  {# Mot de passe oublié #}
-  <p class="form-text text-muted text-center mb-0"> <a href="/">
-    {% trans "Mot de passe oublié ?" %}</a>
-  </p>
 
   {# Separation #}
   <hr class="my-4">
@@ -103,8 +111,8 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Inscription #}
   <small class="text-muted">
     {% blocktrans %}
-      Nouveau sur myHVACR ?
-      <a href="{{ signup_url }}">Créer un compte</a>
+      En créant un compte, vous acceptez les 
+      <a href="{{ signup_url }}">condition d'utilisation</a>
     {% endblocktrans %}
   </small>
   </form>

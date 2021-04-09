@@ -55,7 +55,7 @@ class MySignupForm(SignupForm):
         self.fields['email'].label = _('Adresse e-mail')
         self.fields['email'].widget.attrs.update(
             {
-                # 'class': 'bg-dark',
+                'class': 'form-control',
                 'placeholder': _('Entrez votre e-mail'),
             }
         )
@@ -64,7 +64,7 @@ class MySignupForm(SignupForm):
             self.fields['email2'].label = _('Confirmez votre adresse e-mail')
             self.fields['email2'].widget.attrs.update(
                 {
-                    # 'class': 'bg-dark',
+                    'class': 'form-control',
                     'placeholder': _('Entrez votre e-mail'),
                 }
             )
@@ -73,7 +73,7 @@ class MySignupForm(SignupForm):
         self.fields['password1'].label = _('Mot de passe')
         self.fields['password1'].widget.attrs.update(
             {
-                # 'class': 'bg-dark',
+                'class': 'form-control',
                 'placeholder': _('Entrez votre mot de passe'),
             }
         )
@@ -82,7 +82,7 @@ class MySignupForm(SignupForm):
             self.fields['password2'].label = _('Confirmez votre mot de passe')
             self.fields['password2'].widget.attrs.update(
                 {
-                    # 'class': 'bg-dark',
+                    'class': 'form-control',
                     'placeholder': _('Entrez votre mot de passe'),
                 }
             )

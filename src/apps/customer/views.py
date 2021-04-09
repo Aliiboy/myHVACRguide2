@@ -40,6 +40,8 @@ from customer.forms import (
     # AddEmailForm,
     ProfileUpdateForm,
 )
+# > Settings
+from myhvacrguide.settings import base as settings  # noqa
 
 
 class MySignupView(SignupView):
@@ -50,10 +52,32 @@ class MySignupView(SignupView):
 
     """
 
-    template_name = 'pages/customer/login.html'
+    template_name = 'pages/customer/signup.html'
     form_class = MySignupForm
     redirect_field_name = "next"
     success_url = None
+
+    def get_context_data(self, **kwargs):  # noqa
+        # Laisser SignupView et non MySignupView
+        ret = super(SignupView, self).get_context_data(**kwargs)
+        form = ret['form']
+        email = self.request.session.get('account_verified_email')
+        if email:
+            email_keys = ['email']
+            if settings.SIGNUP_EMAIL_ENTER_TWICE:
+                email_keys.append('email2')
+            for email_key in email_keys:
+                form.fields[email_key].initial = email
+        login_url = passthrough_next_redirect_url(self.request,
+                                                  reverse("customer:account_login"),  # noqa
+                                                  self.redirect_field_name)
+        redirect_field_name = self.redirect_field_name
+        redirect_field_value = get_request_param(self.request,
+                                                 redirect_field_name)
+        ret.update({"login_url": login_url,
+                    "redirect_field_name": redirect_field_name,
+                    "redirect_field_value": redirect_field_value})
+        return ret
 
 
 class MyLoginView(LoginView):
