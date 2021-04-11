@@ -30,6 +30,15 @@ Froid et du Conditionnement d'air" %}{% endblock %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
     <!-- <legend>{% trans "Se déconnecter" %}</legend> -->
+
+    {# Message #}
+    {% blocktrans %}
+    <p class="form-text text-muted text-center mb-0">
+      Veuillez confirmer votre deconnection au site</p>
+    {% endblocktrans %}
+
+    {# Separation #}
+    <hr class="my-4">
   
     {# Validation #}
     <div class="mb-3">

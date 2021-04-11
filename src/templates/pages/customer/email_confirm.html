@@ -1,0 +1,63 @@
+{% extends "layouts/auth_layout.html" %}
+
+{% load i18n %}
+{% load account %}
+
+{% user_display user as user_display %}
+
+{% url 'customer:email_email' as email_url %}
+
+
+{# Changement du Head HTML #}
+{# ---------------------------------------------- #}
+{% block head_title %}{% trans "Vérification de votre adresse e-mail" %}{% endblock %}
+{% block description %}{% trans "Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
+Froid et du Conditionnement d'air" %}{% endblock %}
+
+
+{# Changement du Head #}
+{# ---------------------------------------------- #}
+{% block headertitle %} {{ site_name }} {% endblock %}
+
+{% block headertext %} {% trans "Vérification de votre adresse e-mail..." %} {% endblock %}
+
+
+{# Block de la page #}
+{# ---------------------------------------------- #}
+{% block content %}
+  {# Formulaire - Verification d'adresse email #}
+  {# ---------------------------------------------- #}
+  <form action="{% url 'customer:account_confirm_email' confirmation.key %}" class="p-5 border rounded-3 bg-light" method="post" novalidate>
+    {% csrf_token %}
+  <!-- <legend>{% trans "Verification d'adresse email" %}</legend> -->
+
+    {# Messages #}
+    {% if confirmation %}
+      {% user_display confirmation.email_address.user as user_display %}
+      {% with confirmation.email_address.email as email %}
+        {% blocktrans %}
+          <p class="form-text text-muted text-center mb-0">
+            Veuillez confirmer que <a href="mailto:{{ email }}">{{ email }}</a>
+            est bien votre e-mail d'inscription.</p>
+        {% endblocktrans %}
+      {% endwith %}
+
+      {# Separation #}
+      <hr class="my-4">
+
+      {# Validation #}
+      <button type="submit" class="w-100 btn btn-lg btn-success">{% trans 'Confirmer' %}</button>
+    </form>
+  {% else %}
+
+    {# Messages #}
+    {% blocktrans %}
+      <p class="form-text text-muted text-center mb-0">
+        Ce lien de confirmation par e-mail a expiré ou n'est pas valide.
+        Veuillez émettre <a href="{{ email_url }}">une nouvelle demande de confirmation par e-mail</a>.
+      </p>
+    {% endblocktrans %}
+  {% endif %}
+  </form>
+
+{% endblock content %}

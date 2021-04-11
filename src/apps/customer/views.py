@@ -12,7 +12,7 @@ from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
-# > Django-allauth Utils
+# > Django-allauth
 from allauth.utils import (
     get_request_param,
 )
@@ -23,9 +23,11 @@ from allauth.account.utils import (
 from allauth.account.views import (
     SignupView,
     LoginView,
+    ConfirmEmailView,
     LogoutView,
     PasswordChangeView,
     AccountInactiveView,
+    EmailVerificationSentView,
     # ResetPasswordView,
     # ResetPasswordKeyView,
     # AddEmailView,
@@ -78,6 +80,17 @@ class MySignupView(SignupView):
                     "redirect_field_name": redirect_field_name,
                     "redirect_field_value": redirect_field_value})
         return ret
+
+
+class MyConfirmEmailView(ConfirmEmailView):
+    """
+    Django-allauth.
+
+    Envoie email de confirmation.
+
+    """
+
+    template_name = "pages/customer/email_confirm.html"
 
 
 class MyLoginView(LoginView):
@@ -144,6 +157,18 @@ class MyAccountInactiveView(AccountInactiveView):
     """
 
     template_name = 'pages/customer/account_inactive.html'
+
+
+class MyEmailVerificationSentView(EmailVerificationSentView):
+    """
+    Django-allauth.
+
+    Lorque l'email de confirmation est envoye
+
+    """
+
+    template_name = (
+        'pages/customer/verification_sent.html')
 
 
 # class MyResetPasswordForm(ResetPasswordForm):

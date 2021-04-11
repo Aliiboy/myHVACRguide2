@@ -12,6 +12,9 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 # > Django-allauth
 from allauth.account.adapter import DefaultAccountAdapter
+from allauth.utils import (
+    build_absolute_uri,
+)
 # > Models
 from core.models import (
     CustomSite,
@@ -26,6 +29,22 @@ class MyAccountAdapter(DefaultAccountAdapter):
 
     remplacement des méthodes d'adaptateur
     """
+
+    def get_email_confirmation_url(self, request, emailconfirmation):
+        """
+        Construit l'url de confirmation (activation) de l'e-mail.
+
+        Notez que si vous avez conçu votre système de manière
+        à ce que les confirmations par e-mail soient envoyées
+        en dehors du contexte de la demande, «request» peut être «None» ici.
+        """
+        url = reverse(
+            "customer:account_confirm_email",
+            args=[emailconfirmation.key])
+        ret = build_absolute_uri(
+            request,
+            url)
+        return ret
 
     def is_open_for_signup(self, request):
         """
@@ -69,3 +88,12 @@ class MyAccountAdapter(DefaultAccountAdapter):
         """
         return HttpResponseRedirect(
             reverse('customer:account_inactive'))
+
+    def respond_email_verification_sent(self, request, user):
+        """
+        Email de verification envoye.
+
+        Renvoie vers la page correspondante
+        """
+        return HttpResponseRedirect(
+            reverse('customer:account_email_verification_sent'))

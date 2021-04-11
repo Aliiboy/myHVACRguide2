@@ -16,14 +16,16 @@ Including another URLconf
 """
 
 # > Django
-from django.urls import path
+from django.urls import path, re_path
 # > Vues
 from customer.views import (
     MySignupView,
     MyLoginView,
+    MyConfirmEmailView,
     MyLogoutView,
     MyPasswordChangeView,
     MyAccountInactiveView,
+    MyEmailVerificationSentView,
     # ResetPasswordView,
     # ResetPasswordKeyView,
     # AddEmailView,
@@ -48,10 +50,10 @@ urlpatterns = [
 
     # E-mail
     # path("email/", views.email, name="account_email"),
-    # path("confirm-email/", views.email_verification_sent,
-    #      name="account_email_verification_sent"),
-    # re_path(r"^confirm-email/(?P<key>[-:\w]+)/$", views.confirm_email,
-    #         name="account_confirm_email"),
+    path("confirm-email/", MyEmailVerificationSentView.as_view(),
+         name="account_email_verification_sent"),
+    re_path(r"^confirm-email/(?P<key>[-:\w]+)/$", MyConfirmEmailView.as_view(),
+            name="account_confirm_email"),
 
     # password reset
     # path("password/reset/", views.password_reset,
