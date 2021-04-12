@@ -21,6 +21,7 @@ from allauth.account.utils import (
 )
 # > Django-allauth Views
 from allauth.account.views import (
+    CloseableSignupMixin,
     SignupView,
     LoginView,
     ConfirmEmailView,
@@ -48,7 +49,13 @@ from customer.forms import (
 from myhvacrguide.settings import base as settings  # noqa
 
 
-class MySignupView(SignupView):
+class MyCloseableSignupMixin(CloseableSignupMixin):
+    template_name_signup_closed = (
+        "pages/customer/signup_closed.html"
+    )
+
+
+class MySignupView(MyCloseableSignupMixin, SignupView):
     """
     Django-allauth.
 

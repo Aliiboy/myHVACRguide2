@@ -5,7 +5,7 @@
 
 {# Changement du Head HTML #}
 {# ---------------------------------------------- #}
-{% block head_title %}{% trans "Vérification de votre adresse e-mail" %}{% endblock %}
+{% block head_title %}{% trans "Inscriptions fermées" %}{% endblock %}
 {% block description %}{% trans "Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
 Froid et du Conditionnement d'air" %}{% endblock %}
 
@@ -13,13 +13,13 @@ Froid et du Conditionnement d'air" %}{% endblock %}
 {# Changement du Head #}
 {# ---------------------------------------------- #}
 {% block headertitle %} {{ site_name }} {% endblock %}
-{% block headertext %} {% trans "E-mail envoyé..." %} {% endblock %}
+{% block headertext %} {% trans "Inscriptions fermées..." %} {% endblock %}
 
 
 {# Block de la page #}
 {# ---------------------------------------------- #}
 {% block content %}
-  {# Formulaire - Verification email #}
+  {# Formulaire - Inscriptions fermées #}
   {# ---------------------------------------------- #}
   <form class="p-5 border rounded-3 bg-light">
     <!-- <legend>{% trans "Verification email" %}</legend> -->
@@ -27,8 +27,8 @@ Froid et du Conditionnement d'air" %}{% endblock %}
     {# Message #}
     <p class="form-text text-muted text-center mb-0">
       {% blocktrans %}
-        Des instruction pour valider votre e-mail ont été envoyées.
-        Si le message n'apparaît pas dans votre boite de réception, vérifiez vos dossiers Courrier indésirable ou Spam.
+        Nous sommes désolés.<br />
+        Les inscriptions sont actuellement fermées.
       {% endblocktrans %}
     </p>
   </form>
