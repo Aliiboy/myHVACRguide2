@@ -5,3 +5,11 @@
   {{ message }}
 </div>
 {% endfor %}
+
+{% for error in form.non_field_errors %}
+<div class="alert alert-danger alert-dismissible fade show m-0" role="alert">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+  </button>
+  {{ error }}
+</div>
+{% endfor %}

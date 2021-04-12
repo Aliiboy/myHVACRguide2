@@ -1,0 +1,11 @@
+{% load i18n %}
+{% load account %}
+
+{% user_display user as user_display %}
+<small class="form-text text-center my-0"">
+    <p class="my-0"><strong>{% trans "Remarques "%}:</strong>
+        {% blocktrans %}
+        vous êtes déjà connecté en tant que {{ user_display }}.
+        {% endblocktrans %}
+    </p>
+</small>

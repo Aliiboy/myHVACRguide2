@@ -5,10 +5,24 @@ Formulaires
 """
 
 # > Django
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 # > Forms django
 from django.forms import ModelForm
 # > Forms django-allauth
+from allauth.utils import (
+    build_absolute_uri,
+)
+from allauth.account.utils import (
+    user_pk_to_url_str,
+    user_username,
+)
+from allauth.account.app_settings import (
+    AUTHENTICATION_METHOD,
+    AuthenticationMethod,
+)
+from allauth.account.adapter import get_adapter
 from allauth.account.forms import (
     SignupForm,
     LoginForm,
@@ -16,6 +30,7 @@ from allauth.account.forms import (
     ResetPasswordForm,
     ResetPasswordKeyForm,
     AddEmailForm,
+    default_token_generator,
 )
 # > Crispy Forms
 from crispy_forms.helper import FormHelper
@@ -197,10 +212,45 @@ class MyResetPasswordForm(ResetPasswordForm):
         self.fields['email'].label = _('Adresse e-mail')
         self.fields['email'].widget.attrs.update(
             {
-                # 'class': 'bg-dark',
+                'class': 'form-control',
                 'placeholder': _('Entrez votre e-mail'),
             }
         )
+
+    def save(self, request, **kwargs):
+        current_site = get_current_site(request)
+        email = self.cleaned_data["email"]
+        token_generator = kwargs.get("token_generator",
+                                     default_token_generator)
+
+        for user in self.users:
+
+            temp_key = token_generator.make_token(user)
+
+            # save it to the password reset model
+            # password_reset = PasswordReset(user=user, temp_key=temp_key)
+            # password_reset.save()
+
+            # send the password reset email
+            path = reverse("customer:account_reset_password_from_key",
+                           kwargs=dict(uidb36=user_pk_to_url_str(user),
+                                       key=temp_key))
+            url = build_absolute_uri(
+                request, path)
+
+            context = {"current_site": current_site,
+                       "user": user,
+                       "password_reset_url": url,
+                       "request": request}
+
+            if AUTHENTICATION_METHOD \
+                    != AuthenticationMethod.EMAIL:
+                context['username'] = user_username(user)
+            get_adapter(request).send_mail(
+                'account/email/password_reset_key',
+                email,
+                context)
+        return self.cleaned_data["email"]
 
 
 class MyResetPasswordKeyForm(ResetPasswordKeyForm):
@@ -219,7 +269,7 @@ class MyResetPasswordKeyForm(ResetPasswordKeyForm):
         self.fields['password1'].label = _('Mot de passe')
         self.fields['password1'].widget.attrs.update(
             {
-                # 'class': 'bg-dark',
+                'class': 'form-control',
                 'placeholder': _('Entrez votre mot de passe'),
             }
         )
@@ -227,7 +277,7 @@ class MyResetPasswordKeyForm(ResetPasswordKeyForm):
         self.fields['password2'].label = _('Confirmez votre mot de passe')
         self.fields['password2'].widget.attrs.update(
             {
-                # 'class': 'bg-dark',
+                'class': 'form-control',
                 'placeholder': _('Entrez votre mot de passe'),
             }
         )

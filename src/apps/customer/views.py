@@ -26,10 +26,12 @@ from allauth.account.views import (
     ConfirmEmailView,
     LogoutView,
     PasswordChangeView,
+    PasswordResetView,
+    PasswordResetDoneView,
+    PasswordResetFromKeyView,
+    PasswordResetFromKeyDoneView,
     AccountInactiveView,
     EmailVerificationSentView,
-    # ResetPasswordView,
-    # ResetPasswordKeyView,
     # AddEmailView,
 )
 # > Forms
@@ -37,8 +39,8 @@ from customer.forms import (
     MySignupForm,
     MyLoginForm,
     MyChangePasswordForm,
-    # ResetPasswordForm,
-    # ResetPasswordKeyForm,
+    MyResetPasswordForm,
+    MyResetPasswordKeyForm,
     # AddEmailForm,
     ProfileUpdateForm,
 )
@@ -148,6 +150,78 @@ class MyPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     success_url = reverse_lazy("customer:account_change_password")
 
 
+class MyPasswordResetView(PasswordResetView):
+    """
+    Django-allauth.
+
+    Reinitialisation mot de passe via mail
+
+    """
+
+    template_name = "pages/customer/password_reset.html"
+    form_class = MyResetPasswordForm
+    success_url = reverse_lazy("customer:account_reset_password_done")
+    redirect_field_name = "next"
+
+    def get_context_data(self, **kwargs):  # noqa
+        # Laisser PasswordResetView et non MyPasswordResetView
+        ret = super(PasswordResetView, self).get_context_data(**kwargs)  # noqa
+        login_url = passthrough_next_redirect_url(self.request,
+                                                  reverse("customer:account_login"),  # noqa
+                                                  self.redirect_field_name)
+        # NOTE: For backwards compatibility
+        ret['password_reset_form'] = ret.get('form')
+        # (end NOTE)
+        ret.update({"login_url": login_url})
+        return ret
+
+
+class MyPasswordResetDoneView(PasswordResetDoneView):
+    """
+    Django-allauth.
+
+    Envoie du mail de reinitialisation
+
+    """
+
+    template_name = (
+        "pages/customer/password_reset_done.html"
+    )
+
+
+class MyPasswordResetFromKeyView(PasswordResetFromKeyView):
+    """
+    Django-allauth.
+
+    Nouveau mot de passe
+
+    """
+
+    template_name = "pages/customer/password_reset_from_key.html"
+    form_class = MyResetPasswordKeyForm
+    success_url = reverse_lazy("customer:account_reset_password_from_key_done")
+
+    def get_context_data(self, **kwargs):  # noqa
+        # Laisser PasswordResetDoneView et non MyPasswordResetFromKeyView
+        ret = super(PasswordResetFromKeyView, self).get_context_data(**kwargs)  # noqa
+        ret['action_url'] = reverse(
+            'customer:account_reset_password_from_key',
+            kwargs={'uidb36': self.kwargs['uidb36'],
+                    'key': self.kwargs['key']})
+        return ret
+
+
+class MyPasswordResetFromKeyDoneView(PasswordResetFromKeyDoneView):
+    """
+    Django-allauth.
+
+    Mot de passe modifié
+
+    """
+
+    template_name = "pages/customer/password_reset_from_key_done.html"
+
+
 class MyAccountInactiveView(AccountInactiveView):
     """
     Django-allauth.
@@ -169,33 +243,6 @@ class MyEmailVerificationSentView(EmailVerificationSentView):
 
     template_name = (
         'pages/customer/verification_sent.html')
-
-
-# class MyResetPasswordForm(ResetPasswordForm):
-#     """
-#     Django-allauth.
-
-#     Reinitialisation mot de passe via mail
-
-#     """
-
-
-# class MyResetPasswordKeyForm(ResetPasswordKeyForm):
-#     """
-#     Django-allauth.
-
-#     Reinitialisation du mot de passe via mail
-
-#     """
-
-
-# class MyAddEmailForm(AddEmailForm):
-#     """
-#     Django-allauth.
-
-#     Changement d'e-mail
-
-#     """
 
 
 class ProfileUpdateView(LoginRequiredMixin, generic.FormView):
@@ -229,3 +276,12 @@ class ProfileUpdateView(LoginRequiredMixin, generic.FormView):
         form.save()
         messages.success(self.request, _("Votre profil est à jour"))
         return redirect(self.get_success_url())
+
+
+# class MyAddEmailForm(AddEmailForm):
+#     """
+#     Django-allauth.
+
+#     Changement d'e-mail
+
+#     """

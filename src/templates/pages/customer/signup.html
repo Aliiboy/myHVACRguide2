@@ -16,7 +16,6 @@ Froid et du Conditionnement d'air" %}{% endblock %}
 {# Changement du Head #}
 {# ---------------------------------------------- #}
 {% block headertitle %} {{ site_name }} {% endblock %}
-
 {% block headertext %} {% trans "Inscrivez-vous..." %} {% endblock %}
 
 
@@ -28,14 +27,6 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# FormValidationError #}
     {% if form.errors %}
     <form action="{{ account_signup }}" class="p-5 border rounded-3 bg-light needs-validation was-validated" method="post" novalidate>
-    {% for error in form.non_field_errors %}
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-        </button>
-        {{ error }}
-      </div>
-    {% endfor %}
-
   {% else %}
     <form action="{{ account_signup }}" class=" p-5 border rounded-3 bg-light needs-validation" method="post" novalidate>
   {% endif %}

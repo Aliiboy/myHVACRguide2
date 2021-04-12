@@ -24,6 +24,10 @@ from customer.views import (
     MyConfirmEmailView,
     MyLogoutView,
     MyPasswordChangeView,
+    MyPasswordResetView,
+    MyPasswordResetDoneView,
+    MyPasswordResetFromKeyView,
+    MyPasswordResetFromKeyDoneView,
     MyAccountInactiveView,
     MyEmailVerificationSentView,
     # ResetPasswordView,
@@ -55,16 +59,16 @@ urlpatterns = [
     re_path(r"^confirm-email/(?P<key>[-:\w]+)/$", MyConfirmEmailView.as_view(),
             name="account_confirm_email"),
 
-    # password reset
-    # path("password/reset/", views.password_reset,
-    #      name="account_reset_password"),
-    # path("password/reset/done/", views.password_reset_done,
-    #      name="account_reset_password_done"),
-    # re_path(r"^password/reset/key/(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)/$",
-    #         views.password_reset_from_key,
-    #         name="account_reset_password_from_key"),
-    # path("password/reset/key/done/", views.password_reset_from_key_done,
-    #      name="account_reset_password_from_key_done"),
+    # Password reset
+    path("password/reset/", MyPasswordResetView.as_view(),
+         name="account_reset_password"),
+    path("password/reset/done/", MyPasswordResetDoneView.as_view(),
+         name="account_reset_password_done"),
+    re_path(r"^password/reset/key/(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)/$",
+            MyPasswordResetFromKeyView.as_view(),
+            name="account_reset_password_from_key"),
+    path("password/reset/key/done/", MyPasswordResetFromKeyDoneView.as_view(),
+         name="account_reset_password_from_key_done"),
 
     # > Profil
     path('profile/update/', ProfileUpdateView.as_view(),
