@@ -281,7 +281,7 @@ class ProfileUpdateView(LoginRequiredMixin, generic.FormView):
         Si le formulaire est valide, redirigez vers l'URL fournie.
         """
         form.save()
-        messages.success(self.request, _("Votre profil est à jour"))
+        messages.info(self.request, _("Votre profil est à jour"))
         return redirect(self.get_success_url())
 
 

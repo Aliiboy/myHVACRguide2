@@ -15,6 +15,8 @@ surveillance du programme, pour determiner se qu'il doit etre testé
 
 
 ## VSCODE & PY
+### Creer un environnement virtuel
+py -m venv env
 ### Commandes VS CODE
 - IntelliSense HTML :
 CTRL+Space
@@ -76,22 +78,19 @@ https://gist.github.com/heiswayi/350e2afda8cece810c0f6116dadbe651
 https://www.legalplace.fr/contrats/conditions-generales-d-utilisation/creer/11
 https://django-termsandconditions.readthedocs.io/en/latest/#
 ### Accounts
-delete profile
-renommer app "customer" vers "??"
-### template
-404
-403
-### dashboard
-creation
-### setting
-mise en cache
-### menu navigation en python
-
-### HTML
+- footer
+- changement email
+- delete profile
+- renommer app "customer" vers "??"
+### template HTML/CSS
 Continuer sur dream w au plus simple
-dream w : faire meme principe de andt sur edition du profil
-    ajout ou changement d'email
-    modification de mot de pass
-    tout les templates accounts
-
+- Ajout/changement d'email
+- Side-bar collapse
+- 404
+- 403
+- renommer dossier css de "core" en "componcnent"
+### dashboard
+- creation
+### setting
+- mise en cache
 - Penser a desinstaller cryspi quand tout sera basculer
