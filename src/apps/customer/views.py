@@ -33,7 +33,7 @@ from allauth.account.views import (
     PasswordResetFromKeyDoneView,
     AccountInactiveView,
     EmailVerificationSentView,
-    # AddEmailView,
+    EmailView,
 )
 # > Forms
 from customer.forms import (
@@ -42,7 +42,7 @@ from customer.forms import (
     MyChangePasswordForm,
     MyResetPasswordForm,
     MyResetPasswordKeyForm,
-    # AddEmailForm,
+    MyAddEmailForm,
     ProfileUpdateForm,
 )
 # > Settings
@@ -50,6 +50,13 @@ from myhvacrguide.settings import base as settings  # noqa
 
 
 class MyCloseableSignupMixin(CloseableSignupMixin):
+    """
+    Django-allauth.
+
+    Mixin.
+
+    """
+
     template_name_signup_closed = (
         "pages/customer/signup_closed.html"
     )
@@ -285,10 +292,14 @@ class ProfileUpdateView(LoginRequiredMixin, generic.FormView):
         return redirect(self.get_success_url())
 
 
-# class MyAddEmailForm(AddEmailForm):
-#     """
-#     Django-allauth.
+class MyEmailView(EmailView):
+    """
+    Django-allauth.
 
-#     Changement d'e-mail
+    Changement d'e-mail
 
-#     """
+    """
+
+    template_name = "pages/customer/email.html"
+    form_class = MyAddEmailForm
+    success_url = reverse_lazy('customer:account_email')

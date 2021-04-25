@@ -7,8 +7,12 @@
 {# Changement du Head HTML #}
 {# ---------------------------------------------- #}
 {% block head_title %}{% trans "Ton profil" %}{% endblock %}
-{% block description %}{% trans "Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
-Froid et du Conditionnement d'air" %}{% endblock %}
+{% block description %}
+  {% blocktrans %}
+    Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
+    Froid et du Conditionnement d'air
+  {% endblocktrans %}
+{% endblock %}
 
 
 {# Changement du Head #}
@@ -22,9 +26,9 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Formulaire - Edition du profil #}
   {# ---------------------------------------------- #}
   {% if form.errors %}
-    <form action="{{ profile_update }}" class="row g-3 needs-validation was-validated" method="post" novalidate>
+    <form action="{{ profile_update }}" class="row g-2 needs-validation was-validated" method="post" novalidate>
   {% else %}
-    <form action="{{ profile_update }}" class="row g-3 needs-validation" method="post" novalidate>
+    <form action="{{ profile_update }}" class="row g-2 needs-validation" method="post" novalidate>
   {% endif %}
   {% csrf_token %}
   <!-- <legend>{% trans "Changement du mot de passe" %}</legend> -->
@@ -52,9 +56,9 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {% endfor %}
 
     {# Validation #}
-    <div class="col-12">
+    <div class="col-md-6">
       <button type="submit"
-      class="btn btn-success">{% trans "Mettre à jour le profil" %}</button>
+      class="btn btn-success mb-3">{% trans "Mettre à jour le profil" %}</button>
     </div> <!-- form field -->
     </form>
   

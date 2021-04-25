@@ -9,7 +9,7 @@
 {# Application #}
 {% block app_styles %}
   {% compress css %}
-  <link type="text/x-scss" href="{% static "scss/components.scss" %}" rel="stylesheet" media="screen">
+    <link type="text/x-scss" href="{% static "scss/components.scss" %}" rel="stylesheet" media="screen">
   {% endcompress %}
 {% endblock app_styles %}
 
@@ -44,5 +44,5 @@
 {# Block des scripts JS application. #}
 {# ---------------------------------------------- #}
 {% block app_scripts %}
-<script src="{% static "js/core.js" %}"></script>
+  <script src="{% static "js/components.js" %}"></script>
 {% endblock app_scripts %}

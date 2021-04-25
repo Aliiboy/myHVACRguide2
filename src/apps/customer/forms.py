@@ -299,32 +299,9 @@ class MyAddEmailForm(AddEmailForm):
         self.fields['email'].label = _('Ajouter une adresse e-mail')
         self.fields['email'].widget.attrs.update(
             {
-                # 'class': 'bg-dark',
+                'class': 'form-control',
                 'placeholder': _('Adresse e-mail'),
             }
-        )
-
-        # > Crispy forms
-        self.helper = FormHelper()
-        # Attributs
-        # self.helper.form_id = ''
-        self.helper.form_class = 'px-3'
-        self.helper.form_method = 'post'
-        # self.helper.form_action = ''
-        # > Layout
-        self.helper.layout = Layout(
-            Row(
-                # > Remplacer Field par Column si utilisation de Row
-                Column('email',
-                       css_class='col-xl-8 col-lg-8 col-md-7 col-sm-7'),
-                Column(
-                    Submit('action_add',
-                           _('Ajouter un e-mail'),
-                           css_class='btn btn-success'),
-                    css_class='form-group mt-auto col-xl-4 col-lg-4 col-md-5 col-sm-5'),  # noqa
-                css_class='',
-            ),
-
         )
 
 

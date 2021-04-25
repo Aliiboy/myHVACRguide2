@@ -82,13 +82,14 @@ https://django-termsandconditions.readthedocs.io/en/latest/#
 - changement email
 - delete profile
 - renommer app "customer" vers "??"
+- W3c validator un fois terminé
 ### template HTML/CSS
 Continuer sur dream w au plus simple
-- Ajout/changement d'email
 - Side-bar collapse
 - 404
 - 403
 - renommer dossier css de "core" en "componcnent"
+- hauteur bouton quand c'est en ligne avec les form-floating
 ### dashboard
 - creation
 ### setting

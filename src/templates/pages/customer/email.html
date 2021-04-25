@@ -1,0 +1,175 @@
+{% extends "layouts/customer_layout.html" %}
+
+{% load i18n %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+{% url 'customer:account_email' as account_email %}
+{% url 'customer:account_confirm_email' as account_confirm_email %}
+
+
+{# Changement du Head HTML #}
+{# ---------------------------------------------- #}
+{% block head_title %}{% trans "E-mails" %}{% endblock %}
+{% block description %}{% trans "Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
+Froid et du Conditionnement d'air" %}{% endblock %}
+
+{# Changement du Head #}
+{# ---------------------------------------------- #}
+{% block headertext %} {% trans "E-mails" %} {% endblock %}
+
+
+{# Block de la page #}
+{# ---------------------------------------------- #}
+{% block content %}
+  {# Formulaire - Adresses e-mails du profil #}
+  {# ---------------------------------------------- #}
+  {# Liste des emails du compte #}
+  <div class="col-md-8">
+    <div class="card mb-5">
+      <ul class="list-group list-group-flush">
+        {% for emailaddress in user.emailaddress_set.all %}
+          <li class="list-group-item p-3">
+            {# E-mail #}
+            <div class="d-flex justify-content-between h5 mb-2">
+              <div class="d-flex align-items-center">
+                <span>{{ emailaddress.email }}</span>
+                {# E-mail principal #}
+                {% if emailaddress.primary %}
+                  <span class="mx-2"> - </span>
+                  <span class="text-success">{% trans "Principale" %}</span>
+              </div> <!-- align-items-center -->
+                {# Trash icon gris #}
+                <form class="" method="post" action="{% url 'customer:account_email' %}"
+                  onsubmit="return confirm('{% trans 'Etes-vous sûr de vouloir supprimer cet e-mail de votre compte?' %}');" novalidate>
+                  {% csrf_token %}
+                  <input type="hidden" name="email" value="{{emailaddress.email}}" />
+                  <button type="submit" onClick="modalToggle()" name="action_remove" class="btn p-0">
+                    <i class="fas fa-trash-alt m-0 text-muted"></i>
+                  </button>
+                </form>
+                {# E-mail secondaire #}
+                {% else %} {# emailaddress.primary #}
+              </div> <!-- align-items-center -->
+                {# Trash icon rouge #}
+                <form class="" method="post" action="{% url 'customer:account_email' %}"
+                  onsubmit="return confirm('{% trans 'Etes-vous sûr de vouloir supprimer cet e-mail de votre compte?' %}');" novalidate>
+                  {% csrf_token %}
+                  <input type="hidden" name="email" value="{{emailaddress.email}}" />
+                  <button type="submit" name="action_remove" class="btn p-0">
+                    <i class="fas fa-trash-alt m-0 text-danger"></i>
+                  </button>
+                </form>
+              {% endif %} {# emailaddress.primary #}
+            </div> <!-- justify-content-between -->
+
+            {# Messages #}
+            <div class="card-text">
+              {% if emailaddress.primary %}
+                <span class="text-muted">{% trans "Recoit les notifications" %}</span>
+              {% else %}
+                {% if not emailaddress.verified %}
+                  <div class="d-flex justify-content-start align-items-center">
+                  <span class="text-warning fw-bold">
+                  {% trans "Non vérifiée" %} &nbsp
+                  </span>
+                    <form method="post" action="{% url 'customer:account_email' %}" novalidate>
+                      {% csrf_token %}
+                      <input type="hidden" name="email" value="{{emailaddress.email}}" />
+                      <button type="submit" name="action_send" class="btn btn-link text-decoration-none p-0 border-0">
+                        {% trans "Envoyez l'e-mail de vérification" %}
+                      </button>
+                    </form>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+          </li> <!-- list-group-item -->
+        {% endfor %} {# for emailaddress #}
+      </ul> <!-- list-group-flush -->
+    </div> <!-- card -->
+
+
+    {# Formulaire - E-mail principal #}
+    {# ---------------------------------------------- #}
+    {# FormValidationError #}
+    {% if form.errors %}
+      <form action="{{ account_email }}" class="row g-2 needs-validation was-validated" method="post" novalidate>
+    {% else %}
+      <form action="{{ account_email }}" class="row g-2 needs-validation" method="post" novalidate>
+    {% endif %}
+
+    {% csrf_token %}
+    {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <!-- <legend>{% trans "Ajoutez un e-mail" %}</legend> -->
+    
+    {# Email #}
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <select class="form-select" id="floatingEmailGrid" name="email">
+          {% for emailaddress in user.emailaddress_set.all %}
+            {% if emailaddress.verified %}
+            <option>{{ emailaddress.email }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+        <label for="floatingEmailGrid">{% trans "Adresse e-mail principale" %}</label>
+        <p class="form-text">{{ form.emailaddress.help_text|safe }}</p>
+        {% for error in form.emailaddress.errors %}
+          <div class="invalid-feedback">{{ error|escape }}</div>
+        {% endfor %}
+      </div> <!-- form field -->
+    </div> <!-- col -->
+
+    {# Validation #}
+    <div class="col-md-6">
+      <button style="height:3.5rem;"name="action_primary" type="submit"
+      class="btn btn-primary mb-5">{% trans "Rendre principale" %}</button>
+    </div>
+    </form>
+
+
+    {# Formulaire - Ajout E-mail #}
+    {# ---------------------------------------------- #}
+    {# FormValidationError #}
+    {% if form.errors %}
+      <form action="{{ account_email }}" class="row g-2 needs-validation was-validated" method="post" novalidate>
+    {% else %}
+      <form action="{{ account_email }}" class="row g-2 needs-validation" method="post" novalidate>
+    {% endif %}
+
+    {% csrf_token %}
+    {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <!-- <legend>{% trans "Ajoutez un e-mail" %}</legend> -->
+    
+    {# Email #}
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        {% if form.email.errors %}
+          {{ form.email|add_class:'is-invalid' }}
+        {% else %}
+        {{ form.email }}
+        {% endif %}
+        {{ form.email.label_tag }}
+        <p class="form-text">{{ form.email.help_text|safe }}</p>
+        {% for error in form.email.errors %}
+          <div class="invalid-feedback">{{ error|escape }}</div>
+        {% endfor %}
+      </div> <!-- form field -->
+    </div> <!-- col -->
+
+    {# Validation #}
+    <div class="col-md-6">
+      <button style="height:3.5rem;" name="action_add" type="submit"
+      class="btn btn-success mb-5">{% trans "Ajoutez un e-mail" %}</button>
+    </div>
+    </form>
+
+  </div> <!-- col -->
+
+
+{% endblock content %}

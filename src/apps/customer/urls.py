@@ -30,9 +30,7 @@ from customer.views import (
     MyPasswordResetFromKeyDoneView,
     MyAccountInactiveView,
     MyEmailVerificationSentView,
-    # ResetPasswordView,
-    # ResetPasswordKeyView,
-    # AddEmailView,
+    MyEmailView,
     ProfileUpdateView,
 )
 
@@ -53,7 +51,7 @@ urlpatterns = [
          ),
 
     # E-mail
-    # path("email/", views.email, name="account_email"),
+    path("email/", MyEmailView.as_view(), name="account_email"),
     path("confirm-email/", MyEmailVerificationSentView.as_view(),
          name="account_email_verification_sent"),
     re_path(r"^confirm-email/(?P<key>[-:\w]+)/$", MyConfirmEmailView.as_view(),

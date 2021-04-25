@@ -3,6 +3,7 @@
 
 {% url 'customer:profile_update' as profile_update %}
 {% url 'customer:account_change_password' as account_change_password %}
+{% url 'customer:account_email' as account_email %}
 
 
 {# Account settings menu #}
@@ -10,4 +11,5 @@
 <nav class="nav flex-column nav-pills">
   <a class="nav-link {% if 'accounts/profile/update' in request.path %}active{% endif %}" href="{{ profile_update }}">{% trans "Profil" %}</a>
   <a class="nav-link {% if 'accounts/password/change' in request.path %}active{% endif %}" href="{{ account_change_password }}">{% trans "Mot de passe" %}</a>
+  <a class="nav-link {% if 'accounts/email' in request.path %}active{% endif %}" href="{{ account_email }}">{% trans "E-mails" %}</a>
 </nav>
