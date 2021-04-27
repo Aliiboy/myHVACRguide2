@@ -6,18 +6,18 @@
 {# Customer Layout #}
 {# ---------------------------------------------- #}
 {% block ui_wrapper %}
-    <main class="row py-3 m-4 border rounded bg-white">
-        <div class="col col-2 border-end">
+    <main class="row p-3 m-4 border rounded bg-white">
+        <div class="col-md-4 col-lg-3 col-xl-2">
             {# Menu navigation #}
             {# ---------------------------------------------- #}
             {% include 'components/nav_and_tabs/customer_profile_update_menu.html' %}
         </div> <!-- col -->
-        <div class="col col-10 px-5">
+        <div class="col-md-8 col-lg-9 col-xl-10">
             {# Changement du Head #}
             {# ---------------------------------------------- #}
-            <h2 class="pb-3 mb-4 border-bottom">
+            <h3 class="pb-3 mb-4 border-bottom">
                 {% block headertext %}{% endblock %}
-            </h2>
+            </h3>
             {# Block de la page #}
             {# ---------------------------------------------- #}
             {% block content %}{% endblock content %}  

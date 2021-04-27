@@ -79,7 +79,6 @@ https://www.legalplace.fr/contrats/conditions-generales-d-utilisation/creer/11
 https://django-termsandconditions.readthedocs.io/en/latest/#
 ### Accounts
 - footer
-- changement email
 - delete profile
 - renommer app "customer" vers "??"
 - W3c validator un fois terminé

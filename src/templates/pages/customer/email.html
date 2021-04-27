@@ -11,8 +11,13 @@
 {# Changement du Head HTML #}
 {# ---------------------------------------------- #}
 {% block head_title %}{% trans "E-mails" %}{% endblock %}
-{% block description %}{% trans "Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
-Froid et du Conditionnement d'air" %}{% endblock %}
+{% block description %}
+  {% blocktrans %}
+    Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
+    Froid et du Conditionnement d'air
+  {% endblocktrans %}
+{% endblock %}
+
 
 {# Changement du Head #}
 {# ---------------------------------------------- #}
@@ -25,14 +30,13 @@ Froid et du Conditionnement d'air" %}{% endblock %}
   {# Formulaire - Adresses e-mails du profil #}
   {# ---------------------------------------------- #}
   {# Liste des emails du compte #}
-  <div class="col-md-8">
     <div class="card mb-5">
       <ul class="list-group list-group-flush">
         {% for emailaddress in user.emailaddress_set.all %}
           <li class="list-group-item p-3">
             {# E-mail #}
             <div class="d-flex justify-content-between h5 mb-2">
-              <div class="d-flex align-items-center">
+              <div class="d-flex flex-wrap align-items-center">
                 <span>{{ emailaddress.email }}</span>
                 {# E-mail principal #}
                 {% if emailaddress.primary %}
@@ -125,8 +129,8 @@ Froid et du Conditionnement d'air" %}{% endblock %}
 
     {# Validation #}
     <div class="col-md-6">
-      <button style="height:3.5rem;"name="action_primary" type="submit"
-      class="btn btn-primary mb-5">{% trans "Rendre principale" %}</button>
+      <button name="action_primary" type="submit"
+      class="btn btn-form-floating btn-primary mb-5">{% trans "Rendre principale" %}</button>
     </div>
     </form>
 
@@ -164,12 +168,9 @@ Froid et du Conditionnement d'air" %}{% endblock %}
 
     {# Validation #}
     <div class="col-md-6">
-      <button style="height:3.5rem;" name="action_add" type="submit"
-      class="btn btn-success mb-5">{% trans "Ajoutez un e-mail" %}</button>
+      <button name="action_add" type="submit"
+      class="btn btn-form-floating btn-success mb-5">{% trans "Ajoutez un e-mail" %}</button>
     </div>
     </form>
-
-  </div> <!-- col -->
-
 
 {% endblock content %}

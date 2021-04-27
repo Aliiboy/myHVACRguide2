@@ -8,7 +8,7 @@
 
 {# Account settings menu #}
 {# ---------------------------------------------- #}
-<nav class="nav flex-column nav-pills">
+<nav class="nav flex-column nav-pills mb-3">
   <a class="nav-link {% if 'accounts/profile/update' in request.path %}active{% endif %}" href="{{ profile_update }}">{% trans "Profil" %}</a>
   <a class="nav-link {% if 'accounts/password/change' in request.path %}active{% endif %}" href="{{ account_change_password }}">{% trans "Mot de passe" %}</a>
   <a class="nav-link {% if 'accounts/email' in request.path %}active{% endif %}" href="{{ account_email }}">{% trans "E-mails" %}</a>

@@ -73,6 +73,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # > htmlmin
+    'htmlmin.middleware.HtmlMinifyMiddleware',
+    'htmlmin.middleware.MarkRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'myhvacrguide.urls'
@@ -262,3 +265,14 @@ ACCOUNT_LOGOUT_REDIRECT_URL = 'customer:account_login'
 # > Changement/reset mot de passe
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = False
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+
+
+###############################################################################
+# HTMLmin
+# https://pypi.org/project/django-htmlmin/
+
+# > Minify htlm on debug
+HTML_MINIFY = False
+
+# > Garde les commentaires
+KEEP_COMMENTS_ON_MINIFYING = False

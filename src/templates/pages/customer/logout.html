@@ -8,8 +8,12 @@
 {# Changement du Head HTML #}
 {# ---------------------------------------------- #}
 {% block head_title %}{% trans "Se déconnecter" %}{% endblock %}
-{% block description %}{% trans "Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
-Froid et du Conditionnement d'air" %}{% endblock %}
+{% block description %}
+  {% blocktrans %}
+    Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
+    Froid et du Conditionnement d'air
+  {% endblocktrans %}
+{% endblock %}
 
 
 {# Changement du Head #}

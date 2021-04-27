@@ -2,24 +2,28 @@
 
 /* Body
 -------------------------------------------------- */
-/* Body */
-
 body {
   display: flex;
   flex-wrap: nowrap;
   height: 100vh;
   height: -webkit-fill-available;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
+
 body > * {
   flex-shrink: 0;
   min-height: -webkit-fill-available;
 }
 
 
-/* Icones
+/* Icons
 -------------------------------------------------- */
 i.fas {
   margin-right: 0.5rem;
+}
+
+
+/* Buttons
+-------------------------------------------------- */
+.btn-form-floating {
+  height: $form-floating-height;
 }

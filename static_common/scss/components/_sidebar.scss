@@ -3,11 +3,12 @@
 /* Primary
 -------------------------------------------------- */
 .sidebar {
+  position: fixed;
   width: 13rem;
   .list-unstyled {
-    a, button {
-      height: 3rem;
-    }
+    // a, button {
+    //   height: 3rem;
+    // }
 
     .link-dark {
       color: rgba(0,0,0,0.65);
@@ -18,6 +19,21 @@
       color: rgba(0,0,0,0.85);
     }
   } 
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh); 
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+  }
 }
 
 
@@ -64,14 +80,6 @@
 }
 
 
-/* Souris */
-
-.scrollarea {
-  overflow-y: auto;
-}
-
-
 /* Font */
-
 .fw-semibold { font-weight: 600; }
 .lh-tight { line-height: 1.25; }
