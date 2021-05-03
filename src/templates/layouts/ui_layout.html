@@ -17,27 +17,34 @@
 {# UI Layout #}
 {# ---------------------------------------------- #}
 {% block app_layout %}
-<div class="row min-vh-100 container-fluid p-0 m-0 bg-light">
   {# Sidebar #}
   {# ---------------------------------------------- #}
+  {% include "components/sidebar/ui_sidebar.html" %}
 
-  <aside class="col col-auto p-0">
-    {% include "components/sidebar/ui_sidebar.html" %}
-  </aside>
-
-  {# Components #}
-  {# ---------------------------------------------- #}
-  <div class="col ml-md-auto p-0">
+  <div class="c-wrapper c-fixed-components">
+    {# Components #}
+    {# ---------------------------------------------- #}
     {# Navbar #}
     {% include "components/navbar/ui_navbar.html" %}
+
     {# Messages #}
     {% include 'components/message/ui_messages.html' %}
 
-    {# Ui wrapper #}
-      {# Block de la page #}
-      {% block ui_wrapper %} {% endblock ui_wrapper %}
-  </div> <!-- col ui_layout -->
-</div> <!-- row ui_layout -->
+    <div class="c-body">
+      <main class="c-main">
+        <div class="container-fluid">
+          <div class="fade-in">
+            <div class="row">
+              {# Block du wrapper #}
+              {% block ui_wrapper %} {% endblock ui_wrapper %}
+            </div> <!-- row -->
+          </div> <!-- fade-in -->
+        </div> <!-- container-fluid -->
+      </main> <!-- c-main -->
+      {# Footer #}
+      {% include 'components/footer/ui_footer.html' %}
+    </div> <!-- c-body -->
+  </div> <!-- c-wrapper -->
 {% endblock app_layout %}
 
 

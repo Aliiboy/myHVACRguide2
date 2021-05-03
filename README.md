@@ -81,6 +81,9 @@ https://django-termsandconditions.readthedocs.io/en/latest/#
 - footer
 - delete profile
 - renommer app "customer" vers "??"
+- {% block headertext %}{% endblock %} dans le fil d'ariane
+- Serparer profile (pour emttre a terme la liste des projets, panier etc..) de profile_update
+- oscar PageTitleMixin
 - W3c validator un fois terminé
 ### template HTML/CSS
 Continuer sur dream w au plus simple
@@ -88,9 +91,10 @@ Continuer sur dream w au plus simple
 - 404
 - 403
 - renommer dossier css de "core" en "componcnent"
-- hauteur bouton quand c'est en ligne avec les form-floating
+- breadcrumb
+- renommer dossier "messages" en "alert"
 ### dashboard
 - creation
 ### setting
-- mise en cache
+- mise en cache avec Herooku
 - Penser a desinstaller cryspi quand tout sera basculer

@@ -5,30 +5,70 @@
 
 {# Sidebar #}
 {# ---------------------------------------------- #}
-<div class="sidebar sidebar-sticky bg-white border-end">
-  {# Titre site et logo #}
-  <a class="d-flex align-items-center p-3 mb-3 link-dark text-decoration-none border-bottom" href="/">
-    <span class="fs-6 fw-semibold">{{ site_name }}</span>
-  </a>
+<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+  {# Logo site #}
+  <div class="c-sidebar-brand d-lg-down-none">
+    {# Logo full #}
+    <svg class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
+      <use xlink:href="/static/brand/coreui.svg#full"></use>
+    </svg>
+    {# Logo minimized #}
+    <svg class="c-sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">
+      <use xlink:href="/static/brand/coreui.svg#signet"></use>
+    </svg>
+  </div> <!-- c-sidebar-brand -->
   {# Navigation #}
-    <ul class="list-unstyled ps-0">
-      {# Dropdown Compte #}
-      <li class="m-1">
-        <button class="btn btn-toggle w-100 ps-4 mb-1 d-flex justify-content-between align-items-center link-dark {% if 'accounts' in request.path %}active{% endif %} rounded collapsed" data-bs-toggle="collapse"
-          data-bs-target="#account-collapse" aria-expanded="{% if 'accounts' in request.path %}true{% else %}false{% endif %}"><i class="fas fa-user-alt"></i>
-          {% trans "Compte" %}</button>
-        <div class="{% if 'accounts' in request.path %}collapse show{% else %}collapse{% endif %}" id="account-collapse">
-          {# Items Compte #}
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li>
-              <a href="{{ profile_update }}" class="w-100 ps-5 align-items-center link-dark {% if 'accounts' in request.path %}active{% else %}{% endif %} rounded">{% trans "Parametres" %}</a>
-            </li>
-            <li>
-              <a href="{{ profile_update }}" class="w-100 ps-5 align-items-center link-dark rounded">{% trans "Parametres" %}</a>
-            </li>
-          </ul>
-        </div> <!-- collapse -->
-      </li> <!-- mb-1 -->
-      <li class="border-top my-3"></li>
-    </ul> <!-- list-unstyled -->
-</div> <!-- sidebar -->
+  <ul class="c-sidebar-nav">
+    {# Link #}
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="/">
+        <span class="c-sidebar-nav-icon">
+          <i class="cil-home"></i>
+        </span> {% trans "Acceuil" %}
+      </a>
+    </li>
+    {# Title #}
+    <li class="c-sidebar-nav-divider"></li>
+    <li class="c-sidebar-nav-title">{% trans "Applications" %}</li>
+    {# Dropdown #}
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <span class="c-sidebar-nav-icon">
+          <i class="cil-user"></i>
+        </span> {% trans "Compte" %}
+      </a>
+      {# Dropdown-items #}
+      <ul class="c-sidebar-nav-dropdown-items">
+        <li class="c-sidebar-nav-item">
+          <a class="c-sidebar-nav-link" href="{{ profile_update }}">
+            <span class="c-sidebar-nav-icon"></span> {% trans "Profil" %}
+          </a>
+        </li>
+      </ul>
+    </li>
+    {# Title #}
+    <li class="c-sidebar-nav-divider"></li>
+    <li class="c-sidebar-nav-title">{% trans "Extras" %}</li>
+    {# Dropdown #}
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+      <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <span class="c-sidebar-nav-icon">
+          <i class="cil-star"></i>
+        </span> {% trans "Pages" %}
+      </a>
+      {# Dropdown-items #}
+      <ul class="c-sidebar-nav-dropdown-items">
+        <li class="c-sidebar-nav-item">
+          <a class="c-sidebar-nav-link" href="/page-404.html" target="_top">
+            <span class="c-sidebar-nav-icon">
+              <i class="cil-bug"></i>
+            </span> {% trans "Error 404" %}
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  {# Minimizer button #}
+  <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent"
+    data-class="c-sidebar-minimized"></button>
+</div>

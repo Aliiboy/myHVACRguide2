@@ -6,48 +6,41 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
+    {# Choisi dans quelle version d'IE la page doit être rendue #}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {# Pour les moteurs de recherches #}
-    {# ---------------------------------------------- #}
     <meta name="description" content="{% block description %}{% endblock %}" />
-
+    <meta name="author" content="GOLLIOT Alexandre">
+    <meta name="keyword" content="">
     {# Interdiction de l’indexation des moteurs de recherches #}
     <meta name="robots" content="NONE,NOARCHIVE" />
-
     {# Ajout/modification des meta notamment name="robots" NONE, pour le dashboard #}
-    {% block extrahead %}{% endblock %}
-
     {# Balise pour affichage optimise sur mobile et tablette #}
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-    {# Onglet #}
-    {# ---------------------------------------------- #}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    {# Titre onglet #}
     <title>{% block head_title %}{% endblock %} | {{ site_name }}</title>
-
     {# Icone Onglet #}
     {% block favicon %}
     {% comment %}
     <!-- <link rel="shortcut icon" href="{% static "core/favicon.ico" %}" /> --> {% endcomment %}
-    {% endblock %}
-
-
+    {% endblock favicon %}
+    {# Manifest #}
+    <link rel="manifest" href="">
+    {# Epingler site sur ecran d'acceuil windows #}
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="">
+    {# Couleur de l'interface Chrome pour Android et Apple #}
+    <meta name="theme-color" content="#ffffff">
     {# CSS et SCSS #}
-    {# ---------------------------------------------- #}
-    {# Bootstrap en CDN #}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-
-    {# Fontawesome en CDN #}
-    <script src="https://kit.fontawesome.com/e920ace4be.js" crossorigin="anonymous"></script>
-
+    {# CoreUI en CSS #}
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+    {# CoreUI Icons en CDN #}
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@2.0.0-beta.3/css/all.min.css">
     {# Application #}
     {% block app_styles %}{% endblock app_styles %}
-
-
 </head>
 
-
-<body class="bg-light">
+<body class="c-app">
     {# Layout #}
     {# ---------------------------------------------- #}
     {% block app_layout %}{% endblock %}
@@ -56,14 +49,10 @@
     {# ---------------------------------------------- #}
     {# Block des scripts JS en CDN. #}
     {% block cdn_scripts %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-        crossorigin="anonymous"></script>
+    <script src="{% static "vendors/@coreui/coreui/js/coreui.bundle.min.js" %}"></script>
+    <script src="{% static "vendors/@coreui/icons/js/svgxuse.min.js" %}"></script>
     {% endblock cdn_scripts %}
-
-
     {# Block des scripts JS application. #}
     {% block app_scripts %}{% endblock %}
 </body>
-
 </html>

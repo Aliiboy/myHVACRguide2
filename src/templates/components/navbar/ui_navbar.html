@@ -8,38 +8,96 @@
 
 
 {# Header #}
-{# Navbar-account #}
+{# Navbar #}
 {# ---------------------------------------------- #}
-<header class="navbar sticky-top navbar-expand-sm navbar-light bg-white border-bottom">
-  <div class="container-fluid">
-    {# Collapsing (a mettre en place) #}
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      {# Nav right #}
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        {# Dropdown user #}
-        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" id="dropdown01" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">{{ user_display }}</a>
-          {# Dropdown #}
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown01">
-            {# Items #}
-            <li><a class="dropdown-item" href="{{ profile_update }}">
-                <i class="fas fa-cog"></i>{% trans "Parametres" %}</a></li>
-            {# Separation #}
-            <li><hr class="dropdown-divider"></li>
-            {# Items #}
-            <li><button class="dropdown-item" onclick="signOutLink()">
-                <i class="fas fa-sign-out-alt"></i>{% trans "Se déconnecter" %}</button></li>
-            {# Items #}
-            <li><form style='display: none;' method="post" action="{{ account_logout }}">
-                {% csrf_token %}
-                {% if redirect_field_value %}
-                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                {% endif %}
-                <button id="#signOutBtn" type="submit">{% trans "Se déconnecter" %}</button>
-              </form></li>
-          </ul> <!-- dropdown-menu -->
-        </li> <!-- nav-item dropdown -->
-      </ul> <!-- navbar-nav -->
-    </div> <!-- navbar-collapse -->
-  </div> <!-- container-fluid -->
+<header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+  {# Sidebar button (page reduite) #}
+  <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar"
+    data-class="c-sidebar-show">
+    <span class="c-icon c-icon-lg">
+      <i class="cil-menu"></i>
+    </span>
+  </button>
+  {# Brand (page reduite) #}
+  <a class="c-header-brand d-lg-none" href="#">
+    <svg width="118" height="46" alt="CoreUI Logo">
+      <use xlink:href="/static/brand/coreui.svg#full"></use>
+    </svg>
+  </a>
+  {# Sidebar button (page reduite) #}
+  <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar"
+    data-class="c-sidebar-lg-show" responsive="true">
+    <span class="c-icon c-icon-lg">
+      <i class="cil-menu"></i>
+    </span>
+  </button>
+  {# Items left #}
+  {% comment %}
+  <ul class="c-header-nav d-md-down-none">
+    <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Dashboard</a></li>
+  </ul>
+  {% endcomment %}
+  {# Items right #}
+  <ul class="c-header-nav ml-auto mr-4">
+    {% comment %}
+    {# Icone 1 #}
+    <li class="c-header-nav-item d-md-down-none mx-2">
+      <a class="c-header-nav-link" href="#">
+        <span class="c-icon">
+          <i class="cil-bell"></i>
+        </span>
+      </a>
+    </li>
+    {% endcomment %}
+    {# Dropdown #}
+    <li class="c-header-nav-item dropdown">
+      <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+        aria-expanded="false">
+        {% comment %}
+        <div class="c-avatar">
+          <img class="c-avatar-img" src="/static/assets/img/avatars/6.jpg" alt="user@email.com">
+        </div>
+        {% endcomment %}
+        {{ user_display }}
+      </a>
+      {# Dropdown menu #}
+      <div class="dropdown-menu dropdown-menu-right pt-0">
+        {# Header #}
+        <div class="dropdown-header bg-light py-2"><strong>{% trans "Parametres" %}</strong></div>
+        {# Items #}
+        <a class="dropdown-item" href="{{ profile_update }}">
+          <span class="c-icon mr-2">
+            <i class="cil-user"></i>
+          </span> {% trans "Profil" %}
+        </a>
+        {# Separation #}
+        <div class="dropdown-divider"></div>
+        {# Items #}
+        <a class="dropdown-item" onclick="signOutLink()">
+          <span class="c-icon mr-2">
+            <i class="cil-account-logout"></i>
+          </span> {% trans "Se deconnecter" %}
+          {# Logout forms #}
+          <form style='display: none;' method="post" action="{{ account_logout }}">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <button id="#signOutBtn" type="submit"></button>
+          </form>
+        </a>
+        {# Items #}
+      </div>
+    </li>
+  </ul>
+
+  <div class="c-subheader px-3">
+    <!-- Breadcrumb-->
+    <ol class="breadcrumb border-0 m-0">
+      <li class="breadcrumb-item">Home</li>
+      <li class="breadcrumb-item"><a href="#">Admin</a></li>
+      <li class="breadcrumb-item active">Dashboard</li>
+      <!-- Breadcrumb Menu-->
+    </ol>
+  </div>
 </header>
