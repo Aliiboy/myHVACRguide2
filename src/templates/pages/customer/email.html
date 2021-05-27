@@ -8,7 +8,7 @@
 {% url 'customer:account_confirm_email' as account_confirm_email %}
 
 
-{# Changement du Head HTML #}
+{# HTML Header #}
 {# ---------------------------------------------- #}
 {% block head_title %}{% trans "E-mails" %}{% endblock %}
 {% block description %}
@@ -17,11 +17,6 @@
     Froid et du Conditionnement d'air
   {% endblocktrans %}
 {% endblock %}
-
-
-{# Changement du Head #}
-{# ---------------------------------------------- #}
-{% block headertext %} {% trans "E-mails" %} {% endblock %}
 
 
 {# Block de la page #}

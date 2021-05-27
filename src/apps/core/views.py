@@ -6,36 +6,19 @@ Vues
 
 # > Django
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
-# > Settings
-from myhvacrguide.settings import base as settings
+# > Import
+from core.mixins import (
+    PageTitleMixin,
+)
 
 
-# class IndexView(generic.TemplateView):
-#     """
-#     Index.
-
-#     Page publique de presentation du site
-#     """
-
-#     template_name = "core/index.html"
-
-#     def get(self, request, *args, **kwargs):
-#         """
-#         Redirection vers le BE CENTER.
-
-#         Si login encore actif, renvois au BE CENTER
-#         en lieu et place de l'index.
-#         """
-#         if request.user.is_authenticated:
-#             return redirect(settings.LOGIN_REDIRECT_URL)
-#         return super().get(
-#             request, *args, **kwargs)
-
-
-class IndexUiView(LoginRequiredMixin, generic.TemplateView):
+class IndexUiView(LoginRequiredMixin,
+                  generic.TemplateView,
+                  PageTitleMixin,
+                  ):
     """
     IndexUiView.
 
@@ -43,3 +26,8 @@ class IndexUiView(LoginRequiredMixin, generic.TemplateView):
     """
 
     template_name = "pages/core/index.html"
+    # Mixins PageTitleMixin
+    page_title = _("Acceuil")
+    sidebar_active_link = 'ui_index'
+    sidebar_dropdown_show = None
+    active_tab = None

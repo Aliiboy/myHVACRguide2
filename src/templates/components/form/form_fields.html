@@ -1,0 +1,26 @@
+{% load i18n %}
+
+{% if form.is_bound and not form.is_valid %}
+    <div class="alert alert-danger fade show m-0">
+        <strong>{% trans "Oups! Nous avons trouvé des erreurs" %}</strong>
+         - {% trans "veuillez vérifier les messages d'erreur ci-dessous et réessayer" %}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+
+{% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <div class="alert alert-danger fade show m-0" role="alert">
+        {{ error }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+{% endif %}
+
+{% for field in form %}
+    {% include 'components/form/form_field.html' with field=field style=style %}
+{% endfor %}

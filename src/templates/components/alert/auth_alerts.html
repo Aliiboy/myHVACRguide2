@@ -1,3 +1,6 @@
+{% load i18n %}
+
+
 {% for message in messages %}
 <div class="alert {{ message.tags }} alert-dismissible fade show m-0" role="alert">
   {{ message }}
@@ -7,6 +10,12 @@
 </div>
 {% endfor %}
 
+{% if form.is_bound and not form.is_valid %}
+    <div class="alert alert-danger alert-dismissible fade show m-0">
+        <strong>{% trans "Oops! Nous avons trouvé des erreurs" %}</strong> - {% trans "Veuillez vérifier les messages d'erreur ci-dessous et réessayer" %}
+    </div>
+{% endif %}
+
 {% for error in form.non_field_errors %}
 <div class="alert alert-danger alert-dismissible fade show m-0" role="alert">
   {{ error }}
@@ -15,3 +24,4 @@
   </button>
 </div>
 {% endfor %}
+

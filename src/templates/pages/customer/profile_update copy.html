@@ -1,0 +1,60 @@
+{% extends "layouts/customer_layout.html" %}
+
+{% load i18n %}
+{% load widget_tweaks %}
+
+
+{# HTML Header #}
+{# ---------------------------------------------- #}
+{% block head_title %}{% trans "Profil" %}{% endblock %}
+{% block description %}
+  {% blocktrans %}
+    Portail pour les Responsables d'Affaires et Bureau d'Etudes sous pression du monde du
+    Froid et du Conditionnement d'air
+  {% endblocktrans %}
+{% endblock %}
+
+
+{# Block de la page #}
+{# ---------------------------------------------- #}
+{% block content %}
+  {# Formulaire - Edition du profil #}
+  {# ---------------------------------------------- #}
+  {% if form.errors %}
+    <form action="{{ profile_update }}" class="row g-2 needs-validation was-validated" method="post" novalidate>
+  {% else %}
+    <form action="{{ profile_update }}" class="row g-2 needs-validation" method="post" novalidate>
+  {% endif %}
+  {% csrf_token %}
+  <!-- <legend>{% trans "Changement du mot de passe" %}</legend> -->
+
+  {# Boucle sur les Fields #}
+  {% for field in form %}
+    <div class="col-md-6">
+      <div class="form-floating mb-3" aria-required={% if field.field.required %}"true"{% else %}"false"{% endif %}>
+        {% if field.errors %}
+          {{ field|add_class:'is-invalid' }}
+        {% else %}
+          {{ field }}
+        {% endif %}
+        {{ field.label_tag }}
+        {% if field.help_text %}
+          <p class="form-text">{{ field.help_text|safe }}</p>
+        {% endif %}
+        {% for error in field.errors %}
+          <div class="invalid-feedback">
+            {{ error|escape }}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+
+    {# Validation #}
+    <div class="col-md-6">
+      <button type="submit"
+      class="btn btn-success mb-3">{% trans "Mettre à jour le profil" %}</button>
+    </div> <!-- form field -->
+    </form>
+  
+{% endblock content %}

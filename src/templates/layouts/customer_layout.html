@@ -3,24 +3,48 @@
 {% load i18n %}
 
 
+{# Subheader #}
+{# ---------------------------------------------- #}
+{% block subheader %}
+  <div class="c-subheader-nav-item">
+    <div class="c-subheader-text border-right pr-3">
+      <strong>{% trans "Profil" %}</strong>
+    </div>
+  </div>
+{% endblock subheader %}
+
+{# Breadcrumbs #}
+{# ---------------------------------------------- #}
+{% block breadcrumbs %}
+  {% url 'customer:profile_update' as profile_update %}
+  {% url 'core:ui_home' as ui_home %}
+
+    <li class="breadcrumb-item">
+      <a href="{{ ui_home }}">{% trans "Home" %}</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="{{ profile_update }}">{% trans "Compte" %}</a>
+    </li>
+    {% block extra_breadcrumbs %}{% endblock %}
+    <li class="breadcrumb-item active">
+      {{ page_title }}
+    </li>
+{% endblock breadcrumbs %}
+
+
 {# Customer Layout #}
 {# ---------------------------------------------- #}
 {% block ui_wrapper %}
-    <main class="row p-3 m-4 border rounded bg-white">
-        <div class="col-md-4 col-lg-3 col-xl-2">
-            {# Menu navigation #}
-            {# ---------------------------------------------- #}
-            {% include 'components/nav_and_tabs/customer_profile_update_menu.html' %}
-        </div> <!-- col -->
-        <div class="col-md-8 col-lg-9 col-xl-10">
-            {# Changement du Head #}
-            {# ---------------------------------------------- #}
-            <h3 class="pb-3 mb-4 border-bottom">
-                {% block headertext %}{% endblock %}
-            </h3>
-            {# Block de la page #}
-            {# ---------------------------------------------- #}
-            {% block content %}{% endblock content %}  
-        </div> <!-- col -->
-    </main>
+  <div class="row">
+    <div class="col-lg-4">
+      {# Menu navigation #}
+      {# ---------------------------------------------- #}
+      {% include 'components/nav_and_tabs/customer_profile_tabs.html' %}
+    </div> <!-- col -->
+    <div class="col-lg-8">
+      {# Block de la page #}
+      {# ---------------------------------------------- #}
+      {% block content %}{% endblock content %}
+    </div> <!-- col -->
+  </div> <!-- row -->
 {% endblock ui_wrapper %}

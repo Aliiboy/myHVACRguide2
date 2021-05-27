@@ -20,7 +20,6 @@ from django.urls import path, reverse_lazy
 # > Vues
 from django.views.generic.base import RedirectView
 from core.views import (
-    # IndexView,
     IndexUiView,
 )
 
@@ -28,11 +27,10 @@ from core.views import (
 app_name = 'core'
 urlpatterns = [
     # > Pages publiques
-    # path('', RedirectView.as_view(
-    #     url=reverse_lazy('core:index')),
-    #      name='index',
-    #      ),
-    # path('index/', IndexView.as_view(), name='index'),
-    # > BE Center
-    path('home/', IndexUiView.as_view(), name='home'),
+    path('', RedirectView.as_view(
+        url=reverse_lazy('core:ui_home')),
+         name='index',
+         ),
+    # > UI
+    path('home/', IndexUiView.as_view(), name='ui_home'),
 ]

@@ -20,41 +20,31 @@
 {% block content %}
   {# Formulaire - Edition du profil #}
   {# ---------------------------------------------- #}
-  {% if form.errors %}
-    <form action="{{ profile_update }}" class="row g-2 needs-validation was-validated" method="post" novalidate>
-  {% else %}
-    <form action="{{ profile_update }}" class="row g-2 needs-validation" method="post" novalidate>
-  {% endif %}
-  {% csrf_token %}
-  <!-- <legend>{% trans "Changement du mot de passe" %}</legend> -->
+  <form action="{{ profile_update }}" class="needs-validation" method="post" novalidate>
+    {% csrf_token %}
+    
+    <div class="card">
+      {# Header #}
+      {% block card_header_actions %}
+        <div class="card-header">
+          <span class="float-left">
+            <h5 class="card-title">{{ page_title }}</h5>
+            <h6 class="card-subtitle">{{ page_subtitle }}</h6>
+          </span> <!-- float-left -->
 
-  {# Boucle sur les Fields #}
-  {% for field in form %}
-    <div class="col-md-6">
-      <div class="form-floating mb-3" aria-required={% if field.field.required %}"true"{% else %}"false"{% endif %}>
-        {% if field.errors %}
-          {{ field|add_class:'is-invalid' }}
-        {% else %}
-          {{ field }}
-        {% endif %}
-        {{ field.label_tag }}
-        {% if field.help_text %}
-          <p class="form-text">{{ field.help_text|safe }}</p>
-        {% endif %}
-        {% for error in field.errors %}
-          <div class="invalid-feedback">
-            {{ error|escape }}
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  {% endfor %}
-
-    {# Validation #}
-    <div class="col-md-6">
-      <button type="submit"
-      class="btn btn-success mb-3">{% trans "Mettre à jour le profil" %}</button>
-    </div> <!-- form field -->
-    </form>
+          {# Validation #}
+          <span class="float-right">
+            <button type="submit" class="btn btn-success">{% trans "Enregistrer les modifications" %}</button>
+            <button class="btn btn-secondary" onclick="window.history.go(-1);return false">{% trans "Annuler" %}</button>
+          </span> <!-- float-right -->
+        </div> <!-- card-header -->
+      {% endblock card_header_actions %}
   
+      {# Forms #}
+      <div class="card-body">
+        {% include 'components/form/form_fields.html' with form_id="profile_update_form" %}
+      </div> <!-- card-body -->
+    </div> <!-- card -->
+  </form>
+
 {% endblock content %}

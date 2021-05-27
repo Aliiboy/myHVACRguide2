@@ -9,7 +9,7 @@
 {# Application #}
 {% block app_styles %}
   {% compress css %}
-    <link type="text/x-scss" href="{% static "scss/components.scss" %}" rel="stylesheet" media="screen">
+    {% comment %} <link type="text/x-scss" href="{% static "scss/components.scss" %}" rel="stylesheet" media="screen"> {% endcomment %}
   {% endcompress %}
 {% endblock app_styles %}
 
@@ -24,20 +24,28 @@
   <div class="c-wrapper c-fixed-components">
     {# Components #}
     {# ---------------------------------------------- #}
-    {# Navbar #}
-    {% include "components/navbar/ui_navbar.html" %}
+    {# Header #}
+    <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+      {% include "components/navbar/ui_navbar.html" %}
+      <div class="c-subheader px-3">
+        <div class="c-subheader-nav">
+          {% block subheader %}{% endblock %}
+          <ol class="breadcrumb border-0 m-0 p-3">
+            {% block breadcrumbs %}{% endblock %}
+          </ol>
+        </div> <!-- c-subheader-nav -->
+      </div> <!-- c-subheader -->
+    </header>
 
     {# Messages #}
-    {% include 'components/message/ui_messages.html' %}
+    {% include 'components/alert/ui_alerts.html' %}
 
     <div class="c-body">
       <main class="c-main">
         <div class="container-fluid">
           <div class="fade-in">
-            <div class="row">
               {# Block du wrapper #}
               {% block ui_wrapper %} {% endblock ui_wrapper %}
-            </div> <!-- row -->
           </div> <!-- fade-in -->
         </div> <!-- container-fluid -->
       </main> <!-- c-main -->

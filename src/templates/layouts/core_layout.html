@@ -1,0 +1,37 @@
+{% extends "layouts/ui_layout.html" %}
+
+{% load i18n %}
+
+
+{# Subheader #}
+{# ---------------------------------------------- #}
+{% block subheader %}
+  <div class="c-subheader-nav-item">
+    <div class="c-subheader-text border-right pr-3">
+      <strong>{% trans "Bienvenue" %}</strong>
+    </div>
+  </div>
+{% endblock subheader %}
+
+
+{# Breadcrumbs #}
+{# ---------------------------------------------- #}
+{% block breadcrumbs %}
+    {% block extra_breadcrumbs %}{% endblock %}
+    <li class="breadcrumb-item active">
+      {{ page_title }}
+    </li>
+{% endblock breadcrumbs %}
+
+
+{# Customer Layout #}
+{# ---------------------------------------------- #}
+{% block ui_wrapper %}
+  <div class="row">
+      <div class="col-lg-12">
+          {# Block de la page #}
+          {# ---------------------------------------------- #}
+          {% block content %}{% endblock content %}  
+      </div> <!-- col -->
+  </div> <!-- row -->
+{% endblock ui_wrapper %}

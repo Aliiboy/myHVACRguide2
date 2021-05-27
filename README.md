@@ -78,21 +78,19 @@ https://gist.github.com/heiswayi/350e2afda8cece810c0f6116dadbe651
 https://www.legalplace.fr/contrats/conditions-generales-d-utilisation/creer/11
 https://django-termsandconditions.readthedocs.io/en/latest/#
 ### Accounts
-- footer
 - delete profile
 - renommer app "customer" vers "??"
-- {% block headertext %}{% endblock %} dans le fil d'ariane
-- Serparer profile (pour emttre a terme la liste des projets, panier etc..) de profile_update
-- oscar PageTitleMixin
+- Separer profile (pour emttre a terme la liste des projets, panier etc..) de profile_update
 - W3c validator un fois terminé
+- Voir pour form automatique comme le dashboard oscar
+- Profile update, password etc... : bouton "annuler" renvoie a la page précédente -> Creer un profile_view (ou profile ou profile_overview)
+    pour renvoyer a la page
+- Mettre a jour form_field et form_fields avec les classes htlm de core-ui
 ### template HTML/CSS
-Continuer sur dream w au plus simple
-- Side-bar collapse
 - 404
 - 403
-- renommer dossier css de "core" en "componcnent"
-- breadcrumb
 - renommer dossier "messages" en "alert"
+- Supprimer django compress si plus utilité sur scss
 ### dashboard
 - creation
 ### setting

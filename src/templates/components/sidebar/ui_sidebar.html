@@ -1,6 +1,7 @@
 {% load i18n %}
 
 {% url 'customer:profile_update' as profile_update %}
+{% url 'core:ui_home' as ui_home %}
 
 
 {# Sidebar #}
@@ -21,7 +22,7 @@
   <ul class="c-sidebar-nav">
     {# Link #}
     <li class="c-sidebar-nav-item">
-      <a class="c-sidebar-nav-link" href="/">
+      <a class="c-sidebar-nav-link {% if sidebar_active_link == 'ui_index' %}c-active{% endif %}" href="{{ ui_home }}">
         <span class="c-sidebar-nav-icon">
           <i class="cil-home"></i>
         </span> {% trans "Acceuil" %}
@@ -31,7 +32,7 @@
     <li class="c-sidebar-nav-divider"></li>
     <li class="c-sidebar-nav-title">{% trans "Applications" %}</li>
     {# Dropdown #}
-    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ sidebar_dropdown_show }}">
       <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
         <span class="c-sidebar-nav-icon">
           <i class="cil-user"></i>
@@ -40,7 +41,7 @@
       {# Dropdown-items #}
       <ul class="c-sidebar-nav-dropdown-items">
         <li class="c-sidebar-nav-item">
-          <a class="c-sidebar-nav-link" href="{{ profile_update }}">
+          <a class="c-sidebar-nav-link {% if sidebar_active_link == 'profil' %}c-active{% endif %}" href="{{ profile_update }}">
             <span class="c-sidebar-nav-icon"></span> {% trans "Profil" %}
           </a>
         </li>

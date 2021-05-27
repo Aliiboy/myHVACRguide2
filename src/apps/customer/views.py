@@ -45,7 +45,10 @@ from customer.forms import (
     MyAddEmailForm,
     ProfileUpdateForm,
 )
-# > Settings
+# > Import
+from core.mixins import (
+    PageTitleMixin,
+)
 from myhvacrguide.settings import base as settings  # noqa
 
 
@@ -151,7 +154,10 @@ class MyLogoutView(LogoutView):
     redirect_field_name = "next"
 
 
-class MyPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+class MyPasswordChangeView(LoginRequiredMixin,
+                           PasswordChangeView,
+                           PageTitleMixin,
+                           ):
     """
     Django-allauth.
 
@@ -162,6 +168,12 @@ class MyPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     form_class = MyChangePasswordForm
     template_name = 'pages/customer/password_change.html'
     success_url = reverse_lazy("customer:account_change_password")
+    # Mixins PageTitleMixin
+    page_title = _("Modification du mot de passe")
+    page_subtitle = _("Changer le mot de passe de votre compte")
+    sidebar_active_link = 'profil'
+    sidebar_dropdown_show = 'c-show'
+    active_tab = 'account_change_password'
 
 
 class MyPasswordResetView(PasswordResetView):
@@ -259,7 +271,10 @@ class MyEmailVerificationSentView(EmailVerificationSentView):
         'pages/customer/verification_sent.html')
 
 
-class ProfileUpdateView(LoginRequiredMixin, generic.FormView):
+class ProfileUpdateView(LoginRequiredMixin,
+                        generic.FormView,
+                        PageTitleMixin,
+                        ):
     """
     Account Settings.
 
@@ -269,6 +284,12 @@ class ProfileUpdateView(LoginRequiredMixin, generic.FormView):
     form_class = ProfileUpdateForm
     template_name = 'pages/customer/profile_update.html'
     success_url = reverse_lazy('customer:profile_update')
+    # > Mixins PageTitleMixin
+    page_title = _("Informations personnelles")
+    page_subtitle = _("Mettre à jour vos informations personnelles")
+    sidebar_active_link = 'profil'
+    sidebar_dropdown_show = 'c-show'
+    active_tab = 'profile_update'
 
     def get_form_kwargs(self):
         """
@@ -292,7 +313,7 @@ class ProfileUpdateView(LoginRequiredMixin, generic.FormView):
         return redirect(self.get_success_url())
 
 
-class MyEmailView(EmailView):
+class MyEmailView(EmailView, PageTitleMixin):
     """
     Django-allauth.
 
@@ -303,3 +324,9 @@ class MyEmailView(EmailView):
     template_name = "pages/customer/email.html"
     form_class = MyAddEmailForm
     success_url = reverse_lazy('customer:account_email')
+    # > Mixins PageTitleMixin
+    page_title = _("E-mails")
+    page_subtitle = _("Modifier ou changer à jour vos adresses e-mail")
+    sidebar_active_link = 'profil'
+    sidebar_dropdown_show = 'c-show'
+    active_tab = 'account_email'
